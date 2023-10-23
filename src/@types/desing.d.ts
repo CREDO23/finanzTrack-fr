@@ -4,6 +4,7 @@ declare global {}
 
 interface BtnProps {
   disabled?: boolean;
+  size? : 'big' | 'medium'
   block?: boolean;
   htmlType?: 'button' | 'submit' | 'reset';
   onClick?: MouseEventHandler<HTMLButtonElement>;

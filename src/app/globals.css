@@ -26,7 +26,10 @@ html {
   font-size: .85rem;
   border : solid 1px transparent;
   min-width: 6.25rem;
-  min-height: 1.85rem;
+  min-height: 2rem;
+}
+.btn.big{
+  height: 2.75rem;
 }
 .btn:disabled{
   color: rgba(0, 0, 0, 0.5);
