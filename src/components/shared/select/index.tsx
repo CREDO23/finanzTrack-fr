@@ -16,7 +16,7 @@ export default function Select({
     <ConfigProvider
       theme={{
         token: {
-          colorPrimary: "#ff5722",
+          colorPrimary: "#7F3DFF",
           colorError: "#FE4D4F",
         },
       }}
