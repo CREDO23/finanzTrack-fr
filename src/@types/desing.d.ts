@@ -5,9 +5,8 @@ declare global {}
 interface BtnProps {
   disabled?: boolean;
   block?: boolean;
-  danger?: boolean;
   htmlType?: 'button' | 'submit' | 'reset';
-  onClick?: MouseEventHandler<HTMLAnchorElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
   loading?: boolean;
   children: ReactNode;
   type?: 'primary' | 'secondary';
@@ -49,4 +48,17 @@ interface InputProps {
     | 'numeric'
     | 'decimal'
     | undefined;
+}
+
+interface ISelectProps {
+  defaultValue?: string | string[] | number | number[];
+  label?: string | ReactNode;
+  disabled?: boolean;
+  options: { label: string; value }[];
+  placeholder?: string;
+  size?: 'large' | 'middle' | 'small';
+  value?: string | string[] | number | number[];
+  onChange?: (e: any) => void;
+  showLabel?: boolean;
+  labelColor?: 'primary' | 'secondary';
 }
