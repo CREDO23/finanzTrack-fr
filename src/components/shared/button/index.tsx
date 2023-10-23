@@ -11,13 +11,14 @@ export default function Button(props: BtnProps): JSX.Element {
     type = '',
     onClick,
     htmlType = 'submit',
+    size
   } = props;
 
   return (
     <button
       onClick={onClick}
       disabled={disabled || loading}
-      className={`btn ${!disabled && type} ${block && ' w-full'} flex items-center justify-center `}
+      className={`btn uppercase ${size} ${!disabled && type} ${block && ' w-full'} flex items-center justify-center `}
       type={htmlType}
     >
       {loading ? <Spinner /> : children}
