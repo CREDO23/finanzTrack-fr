@@ -15,17 +15,19 @@ const config: Config = {
       },
       backgroundColor: {
         primary: '#7F3DFF',
-        cgreen: '#7F3DFF',
-        cred: '#7F3DFF',
-        cyellow: '#7F3DFF',
-        cgray: '#7F3DFF',
+        cgreen: '#00A86B',
+        cred: '#FD3C4A',
+        cyellow: '#FCAC12',
+        cgray: '#C6C6C6',
+        cgray1: '#F6F6F6',
       },
       colors : {
         primary: '#7F3DFF',
-        cgreen: '#7F3DFF',
-        cred: '#7F3DFF',
-        cyellow: '#7F3DFF',
-        cgray: '#7F3DFF',
+        cgreen: '#00A86B',
+        cred: '#FD3C4A',
+        cyellow: '#FCAC12',
+        cgray: '#C6C6C6',
+        cgray1: '#F6F6F6'
       }
     },
   },

@@ -5,7 +5,7 @@ import Input from '@/components/shared/input';
 
 export default function Register(): JSX.Element {
   return (
-    <div className=" w-full h-full flex flex-col items-center py-10 gap-6 sm:w-80">
+    <div className=" w-full h-full flex flex-col items-center py-10 gap-6">
       <h3 className=" text-4xl sm:text-2xl font-medium">Register</h3>
       <div className="w-full p-4">
         <form className=" text-sm sm:text-xs font-light flex flex-col gap-10 ">

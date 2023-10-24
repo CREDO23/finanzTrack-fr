@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 import './globals.css';
 import { ConfigProvider } from 'antd';
+import NavigationBar from '@/components/navigationBar';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
@@ -25,7 +26,12 @@ export default function RootLayout({
           },
         }}
       >
-        <body className={montserrat.className}> {children}</body>
+        <body className={`${montserrat.className} `}>
+          {children}
+          <div className=''>
+            <NavigationBar />
+          </div>
+        </body>
       </ConfigProvider>
     </html>
   );
