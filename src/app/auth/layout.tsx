@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import logo from '../../assets/logo/logo.png';
 import Image from 'next/image';
+import AppLayout from '@/components/layouts/appLayout';
 
 export default function Layout({
   children,
@@ -8,13 +9,13 @@ export default function Layout({
   children: ReactNode;
 }): JSX.Element {
   return (
-    <div className="w-full min-h-[100dvh] flex justify-center relative">
-      <div className="w-full h-full sm:w-80 ">
+    <AppLayout>
+      <div className="w-full h-full ">
         {children}
-        <div className=" absolute bottom-0 w-full flex items-center justify-center sm:right-0 sm:w-auto">
-          <Image height={100} src={logo} alt="logo" />
+        <div className=" absolute bottom-0 right-0 flex items-end justify-end w-auto">
+          <Image height={80} src={logo} alt="logo" />
         </div>
       </div>
-    </div>
+    </AppLayout>
   );
 }
