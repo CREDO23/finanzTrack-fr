@@ -36,11 +36,11 @@ export default function NavigationBar(): JSX.Element {
 
   return (
     <div className="w-full h-[5rem] py-2 px-4">
-      <ul className="w-full h-full flex items-center justify-between bg-white">
+      <ul className="w-full h-full flex items-center justify-between  bg-white">
         {items.map((item, key) => {
           if (item.label == 'Add') {
             return (
-              <li className="cursor-pointer border relative " key={item.label}>
+              <li className="cursor-pointer mx-4  relative " key={item.label}>
                 <span
                   className={`text-2xl rounded-full flex items-center justify-center bg-cgreen/10 text-cgreen absolute  ${
                     showActions ? '-top-24 left-20  opacity-100' : 'top-1/2 left-1/2 opacity-0'
@@ -57,7 +57,7 @@ export default function NavigationBar(): JSX.Element {
                 </span>
                 <span
                   onClick={handleshowActions}
-                  className=" text-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-6xl"
+                  className=" text-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl"
                 >
                   {item.icon}
                 </span>
@@ -67,9 +67,9 @@ export default function NavigationBar(): JSX.Element {
             return (
               <li
                 key={item.label}
-                className="flex flex-col cursor-pointer items-center justify-center"
+                className="flex flex-col w-12 cursor-pointer items-center justify-center"
               >
-                <span className=" text-3xl">{item.icon}</span>
+                <span className=" text-2xl">{item.icon}</span>
                 <span className=" text-xs">{item.label}</span>
               </li>
             );
