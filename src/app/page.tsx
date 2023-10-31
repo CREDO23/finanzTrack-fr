@@ -1,3 +1,4 @@
+"use client"
 import Button from "@/components/shared/button"
 import Input from "@/components/shared/input"
 import Select from "@/components/shared/select"
