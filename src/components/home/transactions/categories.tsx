@@ -54,6 +54,15 @@ export const expensesCategories = {
   },
 };
 
+
+// rgb(255, 215, 0)
+// rgb(0, 128, 0)
+// rgb(205, 92, 92)
+// rgb(0, 0, 128)
+// rgb(139, 0, 0)
+// rgb(0, 255, 255)
+
+
 const incomesCategories = {
   salary: {},
 };
