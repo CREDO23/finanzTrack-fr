@@ -61,3 +61,18 @@ html {
   color: white;
   border : solid 1px transparent
 }
+
+  /* ======== SCROLL BAR STYLE ========== */
+  ::-webkit-scrollbar {
+    width: .4rem; 
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #e4d9fa; 
+    border-radius: 5px; 
+  }
+/* firefoc */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #0077b6 #f0f0f0;
+  }
