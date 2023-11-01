@@ -11,7 +11,6 @@ const ChartNoSSR = dynamic(() => import('@/components/home/chart'), {
 export default function Home(): JSX.Element {
 
   return (
-    <AppLayout showNavigationBar={true}>
       <div className="w-full font-light h-full flex flex-col gap-12  bg-gradient-to-b top-0 left-0 from-[#FFF6E5] via-white to-white pt-10 px-4 overflow-auto">
         <div className="w-full flex flex-col gap-7">
           <div className="w-full h-10 flex items-center justify-center">
@@ -76,6 +75,5 @@ export default function Home(): JSX.Element {
           </div>
         </div>
       </div>
-    </AppLayout>
   );
 }

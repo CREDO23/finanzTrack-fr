@@ -7,10 +7,8 @@ export default function Layout({
   children: ReactNode;
 }): JSX.Element {
   return (
-    <AppLayout showNavigationBar={true}>
       <div className="w-full h-full ">
         {children}
       </div>
-    </AppLayout>
   );
 }

@@ -1,44 +1,44 @@
-enum AuthActionEnum {
-    'SET_USER' = 'setUser',
-    'SET_LOADING' = 'setLoading',
-    'SET_ACCESS_TOKEN' = 'setAccessToken',
-  }
+enum AuthActionType {
+  'SET_USER' = 'SET_USER',
+  'SET_LOADING' = 'SET_LOADING',
+  'SET_ACCESS_TOKEN' = 'SET_ACCESS_TOKEN',
+}
 
-interface SetUserActionPayload {
+interface AuthPayloadType {
+  SET_USER: {
     name?: string;
     email?: string;
-  }
-  
-  type SetLoadingActionPayload = boolean;
-  
-  type SetAccessTokenActionPayload = string | null;
-  
-  type AuthActionPayload =
-    | SetAccessTokenActionPayload
-    | SetLoadingActionPayload
-    | SetAccessTokenActionPayload;
-  
-  interface AuthAction {
-    type: AuthActionEnum;
-    payload: AuthActionPayload;
-  }
-  
-  
-  function setUser(
-    payload: SetUserActionPayload,
-    previousState: AuthState['user']
-  ): AuthState['user'] {
-    return { ...previousState, ...payload };
-  }
-  
-  function setLoading(payload: SetLoadingActionPayload): AuthState['isLoading'] {
-    return payload;
-  }
-  
-  function setAccessToken(
-    payload: SetAccessTokenActionPayload
-  ): AuthState['accessToken'] {
-    return payload;
-  }
+  } | null;
+  SET_LOADING: boolean;
+  SET_ACCESS_TOKEN: string | null;
+}
 
-  export {setUser , setAccessToken, setLoading}
+interface AuthAction {
+  type: AuthActionType;
+  payload: AuthPayloadType[AuthAction["type"]];
+}
+
+/* =========== HANDLERS ============= */
+
+function setUser(
+  payload: AuthPayloadType["SET_USER"],
+  previousState: AuthState['user']
+): AuthState['user'] {
+  return { ...previousState, ...payload };
+}
+
+function setLoading(payload: AuthPayloadType["SET_LOADING"]): AuthState['isLoading'] {
+  return payload;
+}
+
+function setAccessToken(
+payload: AuthPayloadType["SET_ACCESS_TOKEN"]
+): AuthState['accessToken'] {
+  return payload;
+}
+
+export type {
+  AuthAction,
+  AuthPayloadType
+};
+export { setUser, setAccessToken, setLoading, AuthActionType };

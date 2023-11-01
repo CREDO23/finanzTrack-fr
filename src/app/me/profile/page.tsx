@@ -1,17 +1,23 @@
 'use client';
-import { useRouter } from 'next/navigation';
+import { ViewActionType } from '@/store/viewState/action';
+import { useViewDispatcher } from '@/store/viewState/provider';
+import Link from 'next/link';
 import { CiEdit } from 'react-icons/ci';
 
 export default function Profile(): JSX.Element {
-  const router = useRouter();
+  const dispatchView = useViewDispatcher();
 
   return (
-    <div className="w-full p-3 font-light flex flex-col gap-4">
+    <div className="w-full font-light flex flex-col gap-5">
       <span
-        onClick={() => router.push('/me/profile/edit')}
-        className=" text-primary text-2xl self-end"
+        onClick={() =>
+          dispatchView({ type: ViewActionType.SET_NAVIGATION, payload: false })
+        }
+        className=" cursor-pointer text-primary text-2xl"
       >
-        <CiEdit />
+        <Link href={'/me/profile/edit'}>
+          <CiEdit />
+        </Link>
       </span>
 
       <div className="w-full flex flex-col gap-3  ">

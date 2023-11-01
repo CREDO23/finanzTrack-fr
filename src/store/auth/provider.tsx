@@ -1,6 +1,7 @@
-import { Dispatch, ReactNode, createContext, useReducer } from 'react';
-import { authReducer } from '../auth/reducer';
-import { AuthAction } from '../auth/actions';
+"use client"
+import { Dispatch, ReactNode, createContext, useContext, useReducer } from 'react';
+import { authReducer } from './reducer';
+import { AuthAction } from './actions';
 
 const initialAuthContext: AuthState = {
   isLoading: false,
@@ -9,10 +10,10 @@ const initialAuthContext: AuthState = {
 };
 
 const AuthContext = createContext(initialAuthContext);
-const AuthDispatcher = createContext<Dispatch<AuthAction> | null>(null);
+const AuthDispatcher = createContext<Dispatch<AuthAction> | (() => null)>(() => null);
 
-const useAuth = () => AuthContext
-const useAuthDispatcher = () => AuthDispatcher
+const useAuth = () => useContext(AuthContext)
+const useAuthDispatcher = () => useContext(AuthDispatcher)
 
 export default function AuthProvider({
   children,
