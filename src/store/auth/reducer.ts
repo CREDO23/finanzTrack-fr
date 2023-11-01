@@ -1,31 +1,32 @@
-import type {AuthAction, SetAccessTokenActionPayload, SetLoadingActionPayload, SetUserActionPayload} from './actions'
-import {setAccessToken, setUser, setLoading} from './actions'
+import type {AuthAction, AuthPayloadType} from './actions'
+import {setAccessToken, setUser, setLoading, AuthActionType} from './actions'
 
 
 export function authReducer(
   initialState: AuthState,
   action: AuthAction
 ): AuthState {
+
   switch (action.type) {
-    case 'setUser':
-      const newUser = setUser(
-        action.payload as SetUserActionPayload,
+    case AuthActionType.SET_USER:
+      const user = setUser(
+        action.payload as AuthPayloadType["SET_USER"],
         initialState.user
       );
 
-      return { ...initialState, user: newUser };
+      return { ...initialState, user };
 
-    case 'setLoading':
-      const newLoadingState = setLoading(
-        action.payload as SetLoadingActionPayload
+    case AuthActionType.SET_LOADING:
+      const isLoading = setLoading(
+        action.payload as AuthPayloadType["SET_LOADING"]
       );
-      return { ...initialState, isLoading: newLoadingState };
+      return { ...initialState, isLoading };
 
-    case 'setAccessToken':
-      const newToken = setAccessToken(
-        action.payload as SetAccessTokenActionPayload
+    case AuthActionType.SET_ACCESS_TOKEN:
+      const accessToken = setAccessToken(
+        action.payload as AuthPayloadType["SET_ACCESS_TOKEN"]
       );
-      return { ...initialState, accessToken: newToken };
+      return { ...initialState, accessToken };
 
     default:
       return initialState;

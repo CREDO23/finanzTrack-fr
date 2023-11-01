@@ -18,7 +18,7 @@ export default function Switch({
   return (
     <div
       onClick={() => handleToggle()}
-      className={`w-12 h-6 border ${
+      className={`w-12 h-6 border cursor-pointer ${
         toggle ? ' bg-primary' : 'bg-white'
       }  rounded-3xl  relative  px-[2px]`}
     >

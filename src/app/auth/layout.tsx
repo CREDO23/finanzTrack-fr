@@ -9,13 +9,11 @@ export default function Layout({
   children: ReactNode;
 }): JSX.Element {
   return (
-    <AppLayout>
       <div className="w-full h-full ">
         {children}
         <div className=" absolute bottom-0 right-0 flex items-end justify-end w-auto">
           <Image height={80} src={logo} alt="logo" />
         </div>
       </div>
-    </AppLayout>
   );
 }
