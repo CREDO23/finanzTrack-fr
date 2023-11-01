@@ -1,12 +1,18 @@
 'use client';
 import AppLayout from '@/components/layouts/appLayout';
-import { ReactNode } from 'react';
+import { ReactNode, useContext } from 'react';
+import AuthContext from '@/store/contexts/authContext';
 
 export default function Layout({
   children,
 }: {
   children: ReactNode;
 }): JSX.Element {
+
+  const currentUser = useContext(AuthContext)
+
+  console.log(currentUser)
+
   return (
     <AppLayout showNavigationBar={true}>
       <div className="w-full h-full bg-cgray1">
