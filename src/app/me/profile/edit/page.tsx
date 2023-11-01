@@ -1,0 +1,50 @@
+'use client';
+import Button from '@/components/shared/button';
+import Input from '@/components/shared/input';
+import Switch from '@/components/shared/switch';
+import { useState } from 'react';
+
+export default function Profile(): JSX.Element {
+  const [password, setPassword] = useState(false);
+
+  return (
+    <div className="w-full p-3 font-light flex flex-col justify-between h-full ">
+      <div className="w-full flex flex-col  gap-4">
+        <div className="w-full flex flex-col gap-3  ">
+          <div className="w-full bg-white flex flex-col gap-1 h-20 rounded p-2">
+            <span className=" text-sm">Name:</span>
+            <Input bordered={false} placeholder="Enter your name" />
+          </div>
+          <div className="w-full  bg-white flex flex-col gap-1 h-20 rounded p-2">
+            <span className=" text-sm">Email:</span>
+            <Input bordered={false} placeholder="Enter your email" />
+          </div>
+        </div>
+        <div className="w-full flex flex-col gap-3">
+          <div className="w-full flex items-center justify-between">
+            <p className=" font-medium">Change password</p>{' '}
+            <Switch
+              onChange={() => setPassword(prev => !prev)}
+              value={password}
+            />
+          </div>
+          {password && (
+            <div className="w-full flex flex-col gap-3  ">
+              <div className="w-full bg-white flex flex-col gap-1 h-16 rounded p-2">
+                <span className="  text-sm">Old password:</span>
+                <Input bordered={false} placeholder="Enter the old password" />
+              </div>
+              <div className="w-full  bg-white flex flex-col gap-1 h-16 rounded p-2">
+                <span className="  text-sm">New password:</span>
+                <Input bordered={false} placeholder="Enter your new password" />
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+      <Button size="big" type="primary">
+        Save modifications
+      </Button>
+    </div>
+  );
+}

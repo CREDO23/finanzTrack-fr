@@ -1,6 +1,4 @@
 import { ReactNode } from 'react';
-import logo from '../../assets/logo/logo.png';
-import Image from 'next/image';
 import AppLayout from '@/components/layouts/appLayout';
 
 export default function Layout({
