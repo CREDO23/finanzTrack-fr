@@ -14,6 +14,7 @@ interface BtnProps {
 }
 
 interface InputProps {
+  bordered?: boolean;
   placeholder?: string;
   label?: string | ReactNode;
   value?: string;

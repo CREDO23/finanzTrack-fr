@@ -3,7 +3,7 @@ import { Montserrat } from 'next/font/google';
 import './globals.css';
 import { ConfigProvider } from 'antd';
 import { ReactNode } from 'react';
-import AuthContext, { defaultUserContext } from '@/store/contexts/authContext';
+import AuthContext, { defaultUserContext } from '@/store/providers/authProvider';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 

@@ -28,6 +28,7 @@ export default function Input(props: InputProps): JSX.Element {
     labelColor = "primary",
     required = false,
     refEl = null,
+    bordered
   } = props;
   return (
     <ConfigProvider
@@ -57,6 +58,7 @@ export default function Input(props: InputProps): JSX.Element {
           ))}
         {type === "text" && (
           <Inpt
+          bordered={bordered}
             required={required}
             placeholder={placeholder}
             value={value}
