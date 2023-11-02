@@ -2,7 +2,6 @@
 
 import { ReactNode } from 'react';
 import { ConfigProvider } from 'antd';
-import AuthProvider from '@/store/auth/provider';
 import dynamic from 'next/dynamic';
 import { Montserrat } from 'next/font/google';
 import '../app/globals.css';
@@ -10,6 +9,8 @@ import '../app/globals.css';
 const WebStorageProvider = dynamic(() => import('@/store/browser/provider'), {
   ssr: false,
 });
+
+const AuthProvider = dynamic(() => import('@/store/auth/provider'),{ssr : false});
 
 const ViewProvider = dynamic(() => import('@/store/viewState/provider'), {
   ssr: false,

@@ -29,7 +29,10 @@ export default function ViewProvider({
 
   const storageDispatch = useStorageDispatcher();
 
+  
+
   useEffect(() => {
+
     storageDispatch({
       type: BrowserStorageActionType.SET_DATA,
       payload: { key: 'view', value: viewContext },
