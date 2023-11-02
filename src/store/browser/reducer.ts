@@ -11,6 +11,7 @@ export default function browserStorageReducer(
   switch (action.type) {
     case BrowserStorageActionType.SET_DATA:
       const {key,value} = setData(action.payload);
+ 
       return { ...store, [key] : value };
 
     default:
