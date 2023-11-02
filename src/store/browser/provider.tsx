@@ -10,20 +10,17 @@ import {
 } from 'react';
 import browserStorageReducer from './reducer';
 import { BrowserStorageAction, persistData } from './actions';
+import initialBrowserStore from './initialState';
 
-const initialBrowserStore: BrowserStorage = {};
 
-const BrowserStorageContext =
+
+export const BrowserStorageContext =
   createContext<BrowserStorage>(initialBrowserStore);
-const BrowserStorageDispatcher = createContext<
+export const BrowserStorageDispatcher = createContext<
   Dispatch<BrowserStorageAction> | (() => null)
 >(() => null);
 
-const useStorage = () => useContext<BrowserStorage>(BrowserStorageContext);
-const useStorageDispatcher = () =>
-  useContext<Dispatch<BrowserStorageAction> | (() => null)>(
-    BrowserStorageDispatcher
-  );
+
 
 export default function StorageProvider({ children }: { children: ReactNode }) {
   let [browserStorage, dispatcher] = useReducer(
@@ -49,4 +46,3 @@ export default function StorageProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export { useStorage, useStorageDispatcher };

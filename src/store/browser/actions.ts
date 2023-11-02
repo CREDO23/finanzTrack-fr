@@ -1,9 +1,9 @@
 enum BrowserStorageActionType {
-    'SET_NEW_DATA' = 'SET_NEW_DATA',
+    'SET_DATA' = 'SET_DATA',
   }
   
   interface BrowserStoragePayloadType {
-    SET_NEW_DATA: {
+    SET_DATA: {
         key: string;
         value: any
     };
@@ -17,14 +17,14 @@ enum BrowserStorageActionType {
   /* =========== HANDLERS ============= */
   
   function setData(
-    payload: BrowserStoragePayloadType["SET_NEW_DATA"],
-  ):  BrowserStoragePayloadType["SET_NEW_DATA"] {
+    payload: BrowserStoragePayloadType["SET_DATA"],
+  ):  BrowserStoragePayloadType["SET_DATA"] {
 
     return payload;
   }
 
   function persistData() : BrowserStorage {
-    return JSON.parse(localStorage.getItem('root') as string)
+    return typeof window != 'undefined' && JSON.parse(localStorage.getItem('root') as string)
   }
   
   export type { BrowserStorageAction, BrowserStoragePayloadType };

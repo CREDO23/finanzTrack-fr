@@ -9,7 +9,7 @@ export default function browserStorageReducer(
   action: BrowserStorageAction
 ): BrowserStorage {
   switch (action.type) {
-    case BrowserStorageActionType.SET_NEW_DATA:
+    case BrowserStorageActionType.SET_DATA:
       const {key,value} = setData(action.payload);
       return { ...store, [key] : value };
 

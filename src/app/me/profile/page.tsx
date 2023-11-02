@@ -1,6 +1,6 @@
 'use client';
 import { ViewActionType } from '@/store/viewState/action';
-import { useViewDispatcher } from '@/store/viewState/provider';
+import { useViewDispatcher } from '@/store/viewState/hooks';
 import Link from 'next/link';
 import { CiEdit } from 'react-icons/ci';
 
