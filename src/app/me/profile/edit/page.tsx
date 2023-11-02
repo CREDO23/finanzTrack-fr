@@ -3,7 +3,7 @@ import Button from '@/components/shared/button';
 import Input from '@/components/shared/input';
 import Switch from '@/components/shared/switch';
 import { useState } from 'react';
-import { useViewDispatcher } from '@/store/viewState/provider';
+import { useViewDispatcher } from '@/store/viewState/hooks';
 import { ViewActionType } from '@/store/viewState/action';
 import Link from 'next/link';
 

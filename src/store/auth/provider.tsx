@@ -1,19 +1,22 @@
-"use client"
-import { Dispatch, ReactNode, createContext, useContext, useReducer } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+'use client';
+import {
+  Dispatch,
+  ReactNode,
+  createContext,
+  useEffect,
+  useReducer,
+} from 'react';
 import { authReducer } from './reducer';
 import { AuthAction } from './actions';
+import initialAuthContext from './initialState';
+import { useStorageDispatcher } from '../browser/hooks';
+import { BrowserStorageActionType } from '../browser/actions';
 
-const initialAuthContext: AuthState = {
-  isLoading: false,
-  user: null,
-  accessToken: null,
-};
-
-const AuthContext = createContext<AuthState>(initialAuthContext);
-const AuthDispatcher = createContext<Dispatch<AuthAction> | (() => null)>(() => null);
-
-const useAuth = () => useContext<AuthState>(AuthContext)
-const useAuthDispatcher = () => useContext<Dispatch<AuthAction> | (() => null)>(AuthDispatcher)
+export const AuthContext = createContext<AuthState>(initialAuthContext);
+export const AuthDispatcher = createContext<
+  Dispatch<AuthAction> | (() => null)
+>(() => null);
 
 export default function AuthProvider({
   children,
@@ -21,6 +24,15 @@ export default function AuthProvider({
   children: ReactNode;
 }): JSX.Element {
   const [authContext, dispatcher] = useReducer(authReducer, initialAuthContext);
+
+  const storageDispatch = useStorageDispatcher();
+
+  useEffect(() => {
+    storageDispatch({
+      type: BrowserStorageActionType.SET_DATA,
+      payload: { key: 'auth', value: authContext },
+    });
+  }, [authContext]);
 
   return (
     <AuthContext.Provider value={authContext}>
@@ -30,5 +42,3 @@ export default function AuthProvider({
     </AuthContext.Provider>
   );
 }
-
-export {useAuth, useAuthDispatcher}

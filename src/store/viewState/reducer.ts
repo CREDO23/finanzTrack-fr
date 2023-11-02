@@ -11,6 +11,10 @@ export default function viewReducer(
       const showNavBar = setNavBar(action.payload);
       return { ...state, showNavBar };
 
+    case ViewActionType.SET_IN_ACTION:
+      const inAction = setNavBar(action.payload);
+      return { ...state, inAction };
+
     default:
       return state;
   }
