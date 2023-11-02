@@ -9,11 +9,11 @@ const initialAuthContext: AuthState = {
   accessToken: null,
 };
 
-const AuthContext = createContext(initialAuthContext);
+const AuthContext = createContext<AuthState>(initialAuthContext);
 const AuthDispatcher = createContext<Dispatch<AuthAction> | (() => null)>(() => null);
 
-const useAuth = () => useContext(AuthContext)
-const useAuthDispatcher = () => useContext(AuthDispatcher)
+const useAuth = () => useContext<AuthState>(AuthContext)
+const useAuthDispatcher = () => useContext<Dispatch<AuthAction> | (() => null)>(AuthDispatcher)
 
 export default function AuthProvider({
   children,
