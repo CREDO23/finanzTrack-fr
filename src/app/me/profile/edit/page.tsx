@@ -3,9 +3,14 @@ import Button from '@/components/shared/button';
 import Input from '@/components/shared/input';
 import Switch from '@/components/shared/switch';
 import { useState } from 'react';
+import { useViewDispatcher } from '@/store/viewState/provider';
+import { ViewActionType } from '@/store/viewState/action';
+import Link from 'next/link';
 
 export default function Profile(): JSX.Element {
   const [password, setPassword] = useState(false);
+
+  const dispatchView = useViewDispatcher();
 
   return (
     <div className="w-full p-3 font-light flex flex-col justify-between h-full ">
@@ -42,8 +47,17 @@ export default function Profile(): JSX.Element {
           )}
         </div>
       </div>
-      <Button size="big" type="primary">
-        Save modifications
+
+      <Button
+        onClick={() =>
+          dispatchView({ type: ViewActionType.SET_NAVIGATION, payload: true })
+        }
+        size="big"
+        type="primary"
+      >
+        <Link className="w-full" href={'/me/profile'}>
+          <span className="w-full"> Save modifications</span>
+        </Link>
       </Button>
     </div>
   );

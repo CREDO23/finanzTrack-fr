@@ -5,54 +5,66 @@ import {
   ReactNode,
   createContext,
   useContext,
+  useEffect,
   useReducer,
 } from 'react';
 import viewReducer from './reducer';
 import type { ViewAction } from './action';
 import NavigationBar from '@/components/navigationBar';
-import { Montserrat } from 'next/font/google';
-const montserrat = Montserrat({ subsets: ['latin'] });
+import { useStorage } from '../browser/provider';
 
-const initialViewState: ViewState = {
-  showNavBar: true,
-};
+import { useStorageDispatcher } from '../browser/provider';
+import { BrowserStorageActionType } from '../browser/actions';
 
-const ViewContext = createContext(initialViewState);
+const initialViewState: ViewState = JSON.parse(
+  localStorage?.getItem('root') as string
+)['view'];
+
+const ViewContext = createContext<ViewState>(initialViewState);
 const ViewDispatcher = createContext<Dispatch<ViewAction> | (() => null)>(
   () => null
 );
 
-const useView = () => useContext(ViewContext);
-const useViewDispatcher = () => useContext(ViewDispatcher);
+const useView = () => useContext<ViewState>(ViewContext);
+const useViewDispatcher = () =>
+  useContext<Dispatch<ViewAction> | (() => null)>(ViewDispatcher);
 
 export default function ViewProvider({
   children,
 }: {
   children: ReactNode;
 }): JSX.Element {
-  const [navBarContext, dispatcher] = useReducer(viewReducer, initialViewState);
+  const [viewContext, dispatcher] = useReducer(viewReducer, initialViewState);
+
+  const storageDispatch = useStorageDispatcher();
+
+  const store = useStorage();
+
+  useEffect(() => {
+    storageDispatch({
+      type: BrowserStorageActionType.SET_NEW_DATA,
+      payload: { key: 'view', value: viewContext },
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [viewContext]);
 
   return (
-    <ViewContext.Provider value={navBarContext}>
+    <ViewContext.Provider value={viewContext}>
       <ViewDispatcher.Provider value={dispatcher}>
-        <body
-          className={`${montserrat.className} min-h-[100vdh] h-[100dvh] flex items-center justify-center flex-col  overflow-hidden `}
+        <div
+          className={`w-full sm:w-96 ${
+            viewContext?.showNavBar ? 'h-[calc(100%-5rem)]' : ' h-full'
+          }`}
         >
-          <div
-            className={`w-full sm:w-96 ${
-              navBarContext.showNavBar ? 'h-[calc(100%-5rem)]' : ' h-full'
-            }`}
-          >
-            {children}
-          </div>
-          <div
-            className={`w-full sm:w-96 ${
-              navBarContext.showNavBar ? ' h-20' : 'h-0'
-            }`}
-          >
-            <NavigationBar />
-          </div>
-        </body>
+          {children}
+        </div>
+        <div
+          className={`w-full sm:w-96 ${
+            viewContext?.showNavBar ? ' h-20' : 'h-0'
+          }`}
+        >
+          <NavigationBar />
+        </div>
       </ViewDispatcher.Provider>
     </ViewContext.Provider>
   );

@@ -1,14 +1,23 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 'use client';
 import dynamic from 'next/dynamic';
 import TransactionItem from '@/components/home/transactions/transactionItem';
-import AppLayout from '@/components/layouts/appLayout';
 import { BiSolidArrowFromBottom, BiSolidArrowFromTop } from 'react-icons/bi';
 import { expensesCategories } from '@/components/home/transactions/categories';
+import { useEffect } from 'react';
+import { useViewDispatcher } from '@/store/viewState/provider';
+import { ViewActionType } from '@/store/viewState/action';
 const ChartNoSSR = dynamic(() => import('@/components/home/chart'), {
   ssr: false,
 });
 
 export default function Home(): JSX.Element {
+
+  const dispatchView = useViewDispatcher()
+
+  useEffect(() => {
+    dispatchView({type : ViewActionType.SET_NAVIGATION, payload : true})
+  },[])
 
   return (
       <div className="w-full font-light h-full flex flex-col gap-12  bg-gradient-to-b top-0 left-0 from-[#FFF6E5] via-white to-white pt-10 px-4 overflow-auto">
