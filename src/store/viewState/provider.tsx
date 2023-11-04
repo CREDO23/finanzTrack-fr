@@ -8,6 +8,7 @@ import {
   useEffect,
   useReducer,
 } from 'react';
+
 import viewReducer from './reducer';
 import type { ViewAction } from './action';
 import NavigationBar from '@/components/navigationBar';
@@ -30,7 +31,6 @@ export default function ViewProvider({
   const storageDispatch = useStorageDispatcher();
 
   
-
   useEffect(() => {
 
     storageDispatch({

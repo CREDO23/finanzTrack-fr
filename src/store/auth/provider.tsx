@@ -13,7 +13,6 @@ import initialAuthContext from './initialState';
 import { useStorageDispatcher } from '../browser/hooks';
 import { BrowserStorageActionType } from '../browser/actions';
 
-console.log(window)
 
 export const AuthContext = createContext<AuthState>(initialAuthContext);
 export const AuthDispatcher = createContext<
