@@ -22,7 +22,7 @@ const registerSchema = joi.object({
     }),
   password: joi.string().required().min(5).messages({
     'any.required': 'The passowrd is required',
-    'any.min': 'The name must be at least 5 characters',
+    'any.min': 'The password must be at least 5 characters',
   }),
   confirmPassword: joi
     .string()
