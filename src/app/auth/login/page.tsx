@@ -5,6 +5,7 @@ import Input from '@/components/shared/input';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { defaultValues, loginSchema } from './validation';
+import Link from 'next/link';
 
 export default function Register(): JSX.Element {
   const { control, handleSubmit } = useForm({
@@ -69,10 +70,12 @@ export default function Register(): JSX.Element {
             </Button>
 
             <p>
-              Don&apos;t have an account ? {'  '}{' '}
-              <span className=" cursor-pointer font-normal text-primary">
-                Register
-              </span>
+              Don&apos;t have an account ?
+              <Link href={'/auth/register'}>
+                <span className=" cursor-pointer font-normal text-primary">
+                  Register
+                </span>
+              </Link>
             </p>
           </div>
         </form>

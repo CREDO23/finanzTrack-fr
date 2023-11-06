@@ -13,7 +13,7 @@ export default function Profile(): JSX.Element {
   const dispatchView = useViewDispatcher();
 
   return (
-    <div className="w-full p-3 font-light flex flex-col justify-between h-full ">
+    <div className="w-full font-light flex flex-col justify-between h-full ">
       <div className="w-full flex flex-col  gap-4">
         <div className="w-full flex flex-col gap-3  ">
           <div className="w-full bg-white flex flex-col gap-1 h-20 rounded p-2">
@@ -47,7 +47,6 @@ export default function Profile(): JSX.Element {
           )}
         </div>
       </div>
-
       <Button
         onClick={() =>
           dispatchView({ type: ViewActionType.SET_NAVIGATION, payload: true })

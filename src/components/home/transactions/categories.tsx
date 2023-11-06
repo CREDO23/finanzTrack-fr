@@ -1,21 +1,15 @@
-import housing from '@/assets/icons/expenses/housing.png';
-import transportation from '@/assets/icons/expenses/transportation.png';
-import groceries from '@/assets/icons/expenses/groceries.png';
-import healthcare from '@/assets/icons/expenses/healthcare.png';
-import clothing from '@/assets/icons/expenses/clothing.png';
-import entertainment from '@/assets/icons/expenses/entertainment.png';
-import education from '@/assets/icons/expenses/education.png';
-import fitness_wellness from '@/assets/icons/expenses/fitness_wellness.png';
+
 import { BsHouse } from 'react-icons/bs';
 import { MdOutlineEmojiTransportation } from 'react-icons/md';
 import { PiBowlFoodLight } from 'react-icons/pi';
 import { TbHealthRecognition } from 'react-icons/tb';
-import { GiClothes } from 'react-icons/gi';
-import { SiDcentertainment } from 'react-icons/si';
+import { GiClothes,GiReceiveMoney,GiPayMoney } from 'react-icons/gi';
+import { SiDcentertainment,SiFreelancer } from 'react-icons/si';
 import { MdCastForEducation } from 'react-icons/md';
-import { IoFitnessOutline } from 'react-icons/io5';
+import { IoFitnessOutline, IoGiftOutline } from 'react-icons/io5';
+import { ReactNode } from 'react';
 
-export const expensesCategories = {
+export const transactionsCategories : {[key : string] : {icon : ReactNode, color : string}} = {
   housing: {
     icon: <BsHouse />,
     color: 'rgb(135, 206, 235)',
@@ -48,21 +42,30 @@ export const expensesCategories = {
     icon: <IoFitnessOutline />,
     color: 'rgb(218, 112, 214)',
   },
-  others: {
+  'expense': {
     color: 'rgb(255, 165, 0)',
-    icon: <IoFitnessOutline />,
+    icon: <span>Exp</span>,
   },
+  // Incomes
+  salary: {
+    color : 'rgb(205, 92, 92)',
+    icon : <GiReceiveMoney/>
+  },
+  freelance :{
+    color : 'rgb(0, 255, 255)',
+    icon : <SiFreelancer/>
+  },
+  gift : {
+      color : 'rgb(0, 0, 128)',
+      icon : <IoGiftOutline/>
+  },
+  investments : {
+      color : 'rgb(0, 128, 0)',
+      icon : <GiPayMoney/>
+  },
+  'income' : {
+      color : 'rgb(139, 100, 60)',
+      icon : <span>In</span>
+  }
 };
 
-
-// rgb(255, 215, 0)
-// rgb(0, 128, 0)
-// rgb(205, 92, 92)
-// rgb(0, 0, 128)
-// rgb(139, 0, 0)
-// rgb(0, 255, 255)
-
-
-const incomesCategories = {
-  salary: {},
-};

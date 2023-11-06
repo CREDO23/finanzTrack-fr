@@ -5,10 +5,7 @@ enum AuthActionType {
 }
 
 interface AuthPayloadType {
-  SET_USER: {
-    name?: string;
-    email?: string;
-  } | null;
+  SET_USER: IUser | null;
   SET_LOADING: boolean;
   SET_ACCESS_TOKEN: string | null;
 }
