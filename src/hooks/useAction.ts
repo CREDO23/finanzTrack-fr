@@ -1,8 +1,8 @@
 import type { AxiosError, AxiosResponse } from 'axios';
 import { useState } from 'react';
 
-function useAxiosAction<S>(action: (actionArg: any) => Promise<AxiosResponse<IAPIResponse<S>>>): [
-  (arg: [actionArg: any]) => Promise<{
+function useAxiosAction<S,A>(action: (actionArg: any) => Promise<AxiosResponse<IAPIResponse<S>>>): [
+  (arg: A) => Promise<{
     data: AxiosResponse<IAPIResponse<S>> | null;
     loading: boolean;
     error: AxiosError<IAPIResponse<null>> | null;
@@ -14,7 +14,7 @@ function useAxiosAction<S>(action: (actionArg: any) => Promise<AxiosResponse<IAP
   const [data, setData] = useState<AxiosResponse<IAPIResponse<S>> | null>(null);
 
   const performAction = async (
-    arg: Parameters<typeof action>
+    arg: A
   ): Promise<{
     data: AxiosResponse<IAPIResponse<S>> | null;
     loading: boolean;

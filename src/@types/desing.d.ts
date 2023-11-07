@@ -63,4 +63,7 @@ interface ISelectProps {
   onChange?: (e: any) => void;
   showLabel?: boolean;
   labelColor?: 'primary' | 'secondary';
+  error? : string;
+  refEl?: RefCallBack;
+  
 }

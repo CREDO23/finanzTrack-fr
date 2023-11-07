@@ -36,9 +36,10 @@ export default function Register(): JSX.Element {
     return await APICall.post('auth/register', { data: rest }, '');
   };
 
-  const [registerUserAction, state] = useAxiosAction<{ user: IUser; accessToken: string }>(registerUser);
+  // Register action
+  const [registerUserAction, state] = useAxiosAction<{ user: IUser; accessToken: string },IUser>(registerUser);
 
-  const onSubmit = async (user: any) => {
+  const onSubmit = async (user : IUser) => {
     await registerUserAction(user);
   };
 
@@ -59,6 +60,7 @@ export default function Register(): JSX.Element {
     if(data){
         msg.success(`Logged as ${data.user.name}`)
         authDispatch({type : AuthActionType.SET_USER, payload : data.user})
+        authDispatch({type : AuthActionType.SET_ACCESS_TOKEN, payload : data.accessToken})
         router.push('/home')
     }
 
