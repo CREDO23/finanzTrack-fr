@@ -7,7 +7,7 @@ interface IAPIResponse<DT> {
   success: boolean;
 }
 
-type Transaction =
+type Transaction = 
   | 'housing'
   | 'trasportation'
   | 'education'

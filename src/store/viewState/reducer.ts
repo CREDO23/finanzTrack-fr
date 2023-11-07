@@ -9,9 +9,8 @@ export default function viewReducer(
   switch (action.type) {
     case ViewActionType.SET_NAVIGATION:
       const showNavBar = setNavBar(action.payload as ViewState["showNavBar"]);
-   
-        return { ...state, showNavBar, showArrowBack : !showNavBar};
-     
+
+        return { ...state, showNavBar };
       
 
     case ViewActionType.SET_IN_ACTION:

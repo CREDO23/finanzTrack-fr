@@ -3,7 +3,7 @@ import TransactionGategoryItem from '@/components/transactions/transactionCatego
 import { useParams } from 'next/navigation';
 
 
-export default function AllTransactionsCategories(): JSX.Element {
+export default function TransactionsCategories(): JSX.Element {
 
   const { type } = useParams();
 

@@ -1,5 +1,9 @@
+"use client"
 import { transactionsCategories } from '@/components/transactions/categories';
 import TransactionItem from '@/components/transactions/transactionItem';
+import { ViewActionType } from '@/store/viewState/action';
+import { useViewDispatcher } from '@/store/viewState/hooks';
+import { useEffect } from 'react';
 
 export default function AllTransactions(): JSX.Element {
   const transactions = [
@@ -39,6 +43,15 @@ export default function AllTransactions(): JSX.Element {
     { category: 'consulting', amount: 700, description: 'Consulting fee', type: 'income' },
     { category: 'online Sales', amount: 250, description: 'E-commerce sales', type: 'income' },
   ];
+
+  const dispatchView = useViewDispatcher()
+
+  useEffect(() => {
+    dispatchView({
+      type :  ViewActionType.SET_ARROW_BACK,
+      payload : false
+    })
+  },[])
 
   return (
     <ul className="w-full px-3 h-full overflow-auto flex flex-col items-center gap-2 ">

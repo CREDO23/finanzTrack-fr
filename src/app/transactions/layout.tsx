@@ -51,7 +51,6 @@ export default function Layout({ children }: { children: ReactNode }): JSX.Eleme
    
   }, []);
 
-  console.log(pathname.split('/')[pathname.split('/').length - 1] != 'new' || !pathname.split('/').includes('categories'))
 
   return (
     <div className="w-full  h-full  flex flex-col gap-4">

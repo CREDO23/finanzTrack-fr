@@ -11,6 +11,8 @@ export default function Select({
   value,
   placeholder = "",
   labelColor = "primary",
+  error,
+  refEl = null,
 }: ISelectProps) {
   return (
     <ConfigProvider
@@ -46,7 +48,13 @@ export default function Select({
           size={size}
           disabled={disabled}
           options={options}
+          ref={refEl}
         />
+        {error && (
+          <div className=" text-xs font-light text-red flex items-center gap-1">
+            <p>{error}</p>
+          </div>
+        )}
       </div>
     </ConfigProvider>
   );
