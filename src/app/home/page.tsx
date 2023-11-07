@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 'use client';
-import TransactionItem from '@/components/home/transactions/transactionItem';
+import TransactionItem from '@/components/transactions/transactionItem';
 import { BiSolidArrowFromBottom, BiSolidArrowFromTop } from 'react-icons/bi';
-import { transactionsCategories } from '@/components/home/transactions/categories';
+import { transactionsCategories } from '@/components/transactions/categories';
 import { useEffect } from 'react';
 import { useViewDispatcher } from '@/store/viewState/hooks';
 import { ViewActionType } from '@/store/viewState/action';
 import { useAuth } from '@/store/auth/hooks';
+import Link from 'next/link';
 
 export default function Home(): JSX.Element {
   const dispatchView = useViewDispatcher();
@@ -36,16 +37,7 @@ export default function Home(): JSX.Element {
       description: 'Electricity and water bill',
       type: 'expense',
     },
-    { category: 'transportation', amount: 100, description: 'Bus pass', type: 'expense' },
-    { category: 'clothing', amount: 200, description: 'Eating at restaurants', type: 'expense' },
-    { category: 'education', amount: 50, description: 'Health insurance premium', type: 'expense' },
-    { category: 'entertainment', amount: 80, description: 'Movie tickets', type: 'expense' },
-    {
-      category: 'fitness and wellness',
-      amount: 60,
-      description: 'Monthly internet bill',
-      type: 'expense',
-    },
+   
     { category: 'education', amount: 400, description: 'Student loan payment', type: 'expense' },
     { category: 'education', amount: 100, description: 'Art supplies', type: 'expense' },
     { category: 'salary', amount: 5000, description: 'Monthly paycheck', type: 'income' },
@@ -53,11 +45,6 @@ export default function Home(): JSX.Element {
     { category: 'investments', amount: 300, description: 'Stock dividends', type: 'income' },
     { category: 'side Job', amount: 600, description: 'Part-time gig', type: 'income' },
     { category: 'rental Income', amount: 800, description: 'Apartment rent', type: 'income' },
-    { category: 'gift', amount: 50, description: 'Birthday gift', type: 'income' },
-    { category: 'bonus', amount: 200, description: 'Year-end bonus', type: 'income' },
-    { category: 'interest', amount: 30, description: 'Savings account interest', type: 'income' },
-    { category: 'consulting', amount: 700, description: 'Consulting fee', type: 'income' },
-    { category: 'online Sales', amount: 250, description: 'E-commerce sales', type: 'income' },
   ];
 
   return (
@@ -109,12 +96,15 @@ export default function Home(): JSX.Element {
         <div className="w-full flex flex-col gap-4">
           <div className="w-full flex items-center justify-between">
             <p className=" font-medium text-xl">Recent transactions</p>
+            <Link href={'/transactions'}>
             <span
-              className="py-1 px-4 border flex items-center justify-center border-cyellow/10
-           rounded-2xl bg-cyellow/10 text-cyellow"
-            >
+            onClick={() => dispatchView({type : ViewActionType.SET_NAVIGATION_TAB, payload : 'trans'})}
+              className="py-1 px-4 border cursor-pointer flex items-center justify-center border-cyellow/10
+              rounded-2xl bg-cyellow/10 text-cyellow"
+              >
               See all
             </span>
+              </Link>
           </div>
           <ul className="w-full flex flex-col items-center gap-2 ">
             {transactions.map((item, key) => {

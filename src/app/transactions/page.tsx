@@ -1,5 +1,5 @@
-import { transactionsCategories } from '@/components/home/transactions/categories';
-import TransactionItem from '@/components/home/transactions/transactionItem';
+import { transactionsCategories } from '@/components/transactions/categories';
+import TransactionItem from '@/components/transactions/transactionItem';
 
 export default function AllTransactions(): JSX.Element {
   const transactions = [
@@ -41,7 +41,7 @@ export default function AllTransactions(): JSX.Element {
   ];
 
   return (
-    <ul className="w-full h-full overflow-auto">
+    <ul className="w-full px-3 h-full overflow-auto flex flex-col items-center gap-2 ">
       {transactions.map((item, key) => {
         return (
           <TransactionItem
@@ -53,7 +53,7 @@ export default function AllTransactions(): JSX.Element {
               { ...(transactionsCategories[item.category] ?? transactionsCategories[item.type]) }
                 .icon
             }
-            title={transactionsCategories[item.category] ? item.category : item.type}
+            title={item.category}
             key={key}
             color={
               { ...(transactionsCategories[item.category] ?? transactionsCategories[item.type]) }

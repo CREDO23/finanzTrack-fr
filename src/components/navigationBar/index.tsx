@@ -2,42 +2,44 @@
 import { TbReport } from 'react-icons/tb';
 import { GrTransaction } from 'react-icons/gr';
 import { BsPlusCircleFill } from 'react-icons/bs';
-import { GoGoal } from 'react-icons/go';
 import { CiUser, CiHome } from 'react-icons/ci';
 import { BiSolidArrowFromBottom, BiSolidArrowFromTop } from 'react-icons/bi';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { useView, useViewDispatcher } from '@/store/viewState/hooks';
 import { ViewActionType } from '@/store/viewState/action';
-import NoSRR from '../NoSRR';
 import Link from 'next/link';
 
 export default function NavigationBar(): JSX.Element {
   const viewState = useView();
   const dispatchView = useViewDispatcher();
 
-  const items = [
+  const items: {
+    label: 'home' | 'repports' | 'trans' | 'me' | 'add';
+    icon: ReactNode;
+    path: string;
+  }[] = [
     {
-      label: 'Home',
+      label: 'home',
       icon: <CiHome />,
       path: '/home',
     },
     {
-      label: 'Reports',
+      label: 'repports',
       icon: <TbReport />,
       path: '/reports',
     },
     {
-      label: 'Add',
+      label: 'add',
       icon: <BsPlusCircleFill />,
       path: '',
     },
     {
-      label: 'Transacions',
+      label: 'trans',
       icon: <GrTransaction />,
       path: '/transactions',
     },
     {
-      label: 'Me',
+      label: 'me',
       icon: <CiUser />,
       path: '/me',
     },
@@ -51,7 +53,7 @@ export default function NavigationBar(): JSX.Element {
     <div className="w-full h-[5rem] py-2 px-4">
       <ul className="w-full h-full flex items-center justify-between  bg-white">
         {items.map((item, key) => {
-          if (item.label == 'Add') {
+          if (item.label == 'add') {
             return (
               <li
                 onClick={() =>
@@ -63,20 +65,32 @@ export default function NavigationBar(): JSX.Element {
                 className="cursor-pointer mx-4  relative "
                 key={item.label}
               >
-                <span
-                  className={`text-2xl rounded-full flex items-center justify-center bg-cgreen text-white absolute  ${
-                    showActions ? '-top-24 left-20  opacity-100' : 'top-1/2 left-1/2 opacity-0'
-                  } transition-all  -translate-x-1/2 -translate-y-1/2  w-16 h-16`}
-                >
-                  <BiSolidArrowFromTop />
-                </span>
-                <span
-                  className={`text-2xl rounded-full flex items-center justify-center bg-cred text-white absolute ${
-                    showActions ? '-top-24 -left-20 opacity-100' : 'top-1/2 left-1/2 opacity-0'
-                  } transition-all  -translate-x-1/2 -translate-y-1/2  w-16 h-16`}
-                >
-                  <BiSolidArrowFromBottom />
-                </span>
+                <Link href={'/transactions/incomes/new'}>
+                  <span
+                    onClick={() => {
+                      handleshowActions();
+                      dispatchView({ type: ViewActionType.SET_NAVIGATION, payload: false });
+                    }}
+                    className={`text-2xl rounded-full flex items-center justify-center bg-cgreen text-white absolute  ${
+                      showActions ? '-top-24 left-20  opacity-100' : 'top-1/2 left-1/2 opacity-0'
+                    } transition-all  -translate-x-1/2 -translate-y-1/2  w-16 h-16`}
+                  >
+                    <BiSolidArrowFromTop />
+                  </span>
+                </Link>
+                <Link href={'/transactions/expenses/new'}>
+                  <span
+                    onClick={() => {
+                      handleshowActions();
+                      dispatchView({ type: ViewActionType.SET_NAVIGATION, payload: false });
+                    }}
+                    className={`text-2xl rounded-full flex items-center justify-center bg-cred text-white absolute ${
+                      showActions ? '-top-24 -left-20 opacity-100' : 'top-1/2 left-1/2 opacity-0'
+                    } transition-all  -translate-x-1/2 -translate-y-1/2  w-16 h-16`}
+                  >
+                    <BiSolidArrowFromBottom />
+                  </span>
+                </Link>
                 <span
                   onClick={handleshowActions}
                   className=" text-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl"
@@ -89,8 +103,13 @@ export default function NavigationBar(): JSX.Element {
             return (
               <Link className="" href={item.path}>
                 <li
+                  onClick={() =>
+                    dispatchView({ type: ViewActionType.SET_NAVIGATION_TAB, payload: item.label })
+                  }
                   key={item.label}
-                  className="flex flex-col w-12 cursor-pointer items-center justify-center"
+                  className={`flex capitalize  flex-col w-14 p-2 ${
+                    viewState.tab == item.label && 'bg-primary/10 '
+                  }  rounded-xl cursor-pointer items-center justify-center`}
                 >
                   <>
                     <span className=" text-2xl">{item.icon}</span>

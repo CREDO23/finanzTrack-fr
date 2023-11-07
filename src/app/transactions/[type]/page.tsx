@@ -1,7 +1,7 @@
 'use client';
 
-import { transactionsCategories } from '@/components/home/transactions/categories';
-import TransactionItem from '@/components/home/transactions/transactionItem';
+import { transactionsCategories } from '@/components/transactions/categories';
+import TransactionItem from '@/components/transactions/transactionItem';
 import { useParams } from 'next/navigation';
 
 export default function Transactions(): JSX.Element {

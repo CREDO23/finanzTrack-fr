@@ -9,8 +9,8 @@ export default function NewExpense(): JSX.Element {
 
   return (
     <div className="w-full h-full flex flex-col ">
-      <div className={`w-full ${type == 'expense' ? 'bg-cred' : type == 'income' ? 'bg-cgreen' : '' }  h-[40%] text-white flex flex-col items-center gap-12 p-10`}>
-        <p className="text-3xl font-medium  capitalize ">{type}</p>
+      <div className={`w-full ${type == 'expenses' ? 'bg-cred' : type == 'incomes' ? 'bg-cgreen' : '' }  h-[40%] text-white flex flex-col items-center gap-8 p-10`}>
+        <p className="text-3xl font-medium  capitalize ">{type.toString().substring(0,type.length-1)}</p>
         <div className="w-full">
           <p className=" text-cgray1 text-lg ">How much?</p>
           <div className=" bg-transparent h-20 flex text-6xl font-light ">
