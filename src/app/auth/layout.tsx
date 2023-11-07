@@ -18,6 +18,10 @@ export default function Layout({
       type: ViewActionType.SET_NAVIGATION,
       payload: false,
     });
+    dispatchView({
+      type: ViewActionType.SET_NAVIGATION_TAB,
+      payload: 'me',
+    });
   }, []);
 
   return (
