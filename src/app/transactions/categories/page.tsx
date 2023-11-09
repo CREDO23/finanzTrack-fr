@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
+
 "use client"
 import TransactionGategoryItem from '@/components/transactions/transactionCategoryItem';
 import { ViewActionType } from '@/store/viewState/action';

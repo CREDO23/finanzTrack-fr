@@ -7,7 +7,7 @@ interface IAPIResponse<DT> {
   success: boolean;
 }
 
-type Transaction = 
+type Transaction =
   | 'housing'
   | 'trasportation'
   | 'education'
@@ -22,3 +22,24 @@ type Transaction =
   | 'gift'
   | 'investments'
   | 'other income';
+
+interface ITransactionCategoryType {
+  id?: string;
+  label: string;
+  description?: string;
+}
+interface ITransactionCategory {
+  id?: string;
+  name: string;
+  description?: string;
+  type_id?: string;
+  type? : ITransactionCategoryType
+}
+
+interface ITransaction {
+  id?: string;
+  amount?: number;
+  description: string;
+  category_id?: string;
+  category? : ITransactionCategory
+}

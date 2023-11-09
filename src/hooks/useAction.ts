@@ -1,7 +1,7 @@
 import type { AxiosError, AxiosResponse } from 'axios';
 import { useState } from 'react';
 
-function useAxiosAction<S,A>(action: (actionArg: any) => Promise<AxiosResponse<IAPIResponse<S>>>): [
+function useAxiosAction<S,A = void>(action: (actionArg: any) => Promise<AxiosResponse<IAPIResponse<S>>>): [
   (arg: A) => Promise<{
     data: AxiosResponse<IAPIResponse<S>> | null;
     loading: boolean;

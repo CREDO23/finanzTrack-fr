@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 "use client"
 import { transactionsCategories } from '@/components/transactions/categories';
 import TransactionItem from '@/components/transactions/transactionItem';

@@ -101,7 +101,7 @@ export default function NavigationBar(): JSX.Element {
             );
           } else {
             return (
-              <Link className="" href={item.path}>
+              <Link key={item.label} className="" href={item.path}>
                 <li
                   onClick={() =>
                     dispatchView({ type: ViewActionType.SET_NAVIGATION_TAB, payload: item.label })
