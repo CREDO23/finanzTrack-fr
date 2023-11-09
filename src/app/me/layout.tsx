@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 'use client';
 import { ReactNode, useEffect } from 'react';
 import { useAuth, useAuthDispatcher } from '@/store/auth/hooks';

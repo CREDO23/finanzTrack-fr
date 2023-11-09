@@ -1,0 +1,27 @@
+import {
+  TransCtgryAction,
+  TransCtgryActionType,
+  TransCtgryPayloadType,
+  setLoading,
+  setCategories
+} from './actions';
+
+export default function transCtgryReducer(
+  state: TransCtgryState,
+  action: TransCtgryAction
+): TransCtgryState {
+  switch (action.type) {
+    case TransCtgryActionType.SET_CATEGORIES:
+      const newCategories = setCategories(
+        action.payload as TransCtgryPayloadType['SET_CATEGORIES'],
+        state.items
+      );
+      return { ...state, items: newCategories };
+
+    case TransCtgryActionType.SET_LOADING:
+      const loading = setLoading(action.payload as TransCtgryPayloadType['SET_LOADING']);
+      return { ...state, loading };
+    default:
+      return state;
+  }
+}

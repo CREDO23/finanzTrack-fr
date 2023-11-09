@@ -32,7 +32,7 @@ export default function Me(): JSX.Element {
   return (
     <ul className=" rounded-xl overflow-hidden divide-y">
       {options.map(el => (
-        <Link href={`/me${el.path}`}>
+        <Link key={el.title} href={`/me${el.path}`}>
           <li
             key={el.title}
             className="flex items-center gap-2 p-3 bg-white hover:bg-primary/5 cursor-pointer "

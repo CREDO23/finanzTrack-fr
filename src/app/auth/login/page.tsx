@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
+
 'use client';
 
 import Button from '@/components/shared/button';
@@ -105,7 +108,7 @@ export default function Register(): JSX.Element {
               />
             </div>
             <div className="w-full flex flex-col py-4 gap-3 items-center">
-              <Button size="big" type="primary" block>
+              <Button loading={state.loading} size="big" type="primary" block>
                 Sign In
               </Button>
 

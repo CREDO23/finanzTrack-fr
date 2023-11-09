@@ -8,7 +8,7 @@ interface IRquest {
 class APICall {
   static apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-  static get = async (url: string, request: IRquest, token: string) =>
+  static get = async (url: string, request: IRquest, token: string | null | undefined) =>
     await axios({
       baseURL: this.apiUrl,
       method: 'GET',
@@ -20,7 +20,7 @@ class APICall {
       },
     });
 
-  static post = async (url: string, request: IRquest, token: string) => await axios({
+  static post = async (url: string, request: IRquest, token: string | null | undefined) => await axios({
       baseURL: this.apiUrl,
       method: 'POST',
       url,
@@ -32,7 +32,7 @@ class APICall {
       },
     });
 
-  static put = async (url: string, request: IRquest, token: string) =>
+  static put = async (url: string, request: IRquest, token: string | null | undefined) =>
     await axios({
       baseURL: this.apiUrl,
       method: 'PUT',
@@ -45,7 +45,7 @@ class APICall {
       },
     });
 
-  static delete = async (url: string, request: IRquest, token: string) =>
+  static delete = async (url: string, request: IRquest, token: string | null | undefined) =>
     await axios({
       baseURL: this.apiUrl,
       method: 'DELETE',
