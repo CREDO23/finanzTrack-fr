@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { Montserrat } from 'next/font/google';
 import '../app/globals.css';
 import { usePathname } from 'next/navigation';
+import { NextFont } from 'next/dist/compiled/@next/font';
 
 const WebStorageProvider = dynamic(() => import('@/store/browser/provider'), {
   ssr: false,
@@ -23,17 +24,14 @@ const TransCtgryProvider = dynamic(() => import('@/store/transactionCategory/pro
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
-export default function Providers({ children }: { children: ReactNode }): JSX.Element {
+export default function Providers({ children, font }: { children: ReactNode, font : NextFont }): JSX.Element {
 
   const pathname = usePathname()
 
-
   return (
     <body
-      className={`${montserrat.className} min-h-[100vdh] h-[100dvh] flex items-center justify-center flex-col  overflow-hidden `}
+      className={`${font.className} min-h-[100vdh] h-[100dvh] flex items-center justify-center flex-col  overflow-hidden `}
     >
-      {
-        pathname == '/' ? <div className='w-full h-full'>{children}</div> : 
       
       <ConfigProvider
         theme={{
@@ -45,13 +43,13 @@ export default function Providers({ children }: { children: ReactNode }): JSX.El
       >
         <WebStorageProvider>
           <AuthProvider>
-            <TransCtgryProvider>
-              <ViewProvider>{children}</ViewProvider>
-            </TransCtgryProvider>
+            {/* <TransCtgryProvider> */}
+            {pathname.split('/')[1] == 'ladding_page' ? children :  <ViewProvider>{children}</ViewProvider>}
+             
+            {/* </TransCtgryProvider> */}
           </AuthProvider>
         </WebStorageProvider>
       </ConfigProvider>
-      }
     </body>
   );
 }
