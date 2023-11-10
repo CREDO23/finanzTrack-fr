@@ -28,6 +28,12 @@ input[type="number"] {
     appearance: textfield;
 }
 
+.bg_cover {
+  background-image: url('../assets/images/cover.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 /* ===============  BUTTONS  ================ */
 
 .btn{
