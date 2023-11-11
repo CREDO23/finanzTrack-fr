@@ -3,7 +3,7 @@
 import TransactionItem from '@/components/transactions/transactionItem';
 import { BiSolidArrowFromBottom, BiSolidArrowFromTop } from 'react-icons/bi';
 import { transactionsCategories } from '@/components/transactions/categories';
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import { useViewDispatcher } from '@/store/viewState/hooks';
 import { ViewActionType } from '@/store/viewState/action';
 import { useAuth } from '@/store/auth/hooks';
@@ -15,6 +15,12 @@ export default memo(function Home(): JSX.Element {
   const dispatchView = useViewDispatcher();
   const currentUser = useAuth();
   
+  useEffect(() => {
+    dispatchView({
+      type : ViewActionType.SET_NAVIGATION,
+      payload : true
+    })
+  },[])
 
 
   const totalTransactions = [

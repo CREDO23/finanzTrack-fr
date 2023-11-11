@@ -7,9 +7,9 @@ import {
 } from './actions';
 
 export default function transCtgryReducer(
-  state: TransCtgryState,
+  state: ITransCtgryState,
   action: TransCtgryAction
-): TransCtgryState {
+): ITransCtgryState {
   switch (action.type) {
     case TransCtgryActionType.SET_CATEGORIES:
       const newCategories = setCategories(
