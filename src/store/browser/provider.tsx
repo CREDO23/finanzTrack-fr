@@ -4,6 +4,7 @@ import {
   Dispatch,
   ReactNode,
   createContext,
+  memo,
   useEffect,
   useReducer,
 } from 'react';
@@ -21,7 +22,7 @@ export const BrowserStorageDispatcher = createContext<
 
 
 
-export default function StorageProvider({ children }: { children: ReactNode }) {
+export default memo(function StorageProvider({ children }: { children: ReactNode }) {
   let [browserStorage, dispatcher] = useReducer(
     browserStorageReducer,
     initialBrowserStore
@@ -43,5 +44,5 @@ export default function StorageProvider({ children }: { children: ReactNode }) {
       </BrowserStorageDispatcher.Provider>
     </BrowserStorageContext.Provider>
   );
-}
+})
 

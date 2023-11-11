@@ -2,7 +2,7 @@
 'use client';
 
 import { Dispatch, ReactNode, createContext, useEffect, useReducer } from 'react';
-
+import {memo} from 'react'
 import viewReducer from './reducer';
 import { ViewActionType, type ViewAction } from './action';
 import NavigationBar from '@/components/navigationBar';
@@ -15,7 +15,7 @@ import { useRouter } from 'next/navigation';
 export const ViewContext = createContext<ViewState>(initialViewState);
 export const ViewDispatcher = createContext<Dispatch<ViewAction> | (() => null)>(() => null);
 
-export default function ViewProvider({ children }: { children: ReactNode }): JSX.Element {
+export default memo(function ViewProvider({ children }: { children: ReactNode }): JSX.Element {
   const [viewContext, dispatcher] = useReducer(viewReducer, initialViewState);
 
   const storageDispatch = useStorageDispatcher();
@@ -63,4 +63,4 @@ export default function ViewProvider({ children }: { children: ReactNode }): JSX
       </ViewDispatcher.Provider>
     </ViewContext.Provider>
   );
-}
+})

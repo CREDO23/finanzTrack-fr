@@ -13,8 +13,7 @@ export default function transCtgryReducer(
   switch (action.type) {
     case TransCtgryActionType.SET_CATEGORIES:
       const newCategories = setCategories(
-        action.payload as TransCtgryPayloadType['SET_CATEGORIES'],
-        state.items
+        action.payload as TransCtgryPayloadType['SET_CATEGORIES']
       );
       return { ...state, items: newCategories };
 
