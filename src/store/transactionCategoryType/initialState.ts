@@ -1,7 +1,7 @@
-const initialTransCtgryTypeState: TransCtgryState = typeof window != 'undefined' && ( (JSON.parse(
+const initialTransCtgryTypeState: ITransCtgryTypeState = typeof window != 'undefined' && ( (JSON.parse(
     localStorage.getItem('root') as string
   ) &&
-    JSON.parse(localStorage.getItem('root') as string)['transactionCategoryType']) ?? []);
+    JSON.parse(localStorage.getItem('root') as string)['transactionCategoryTypes']) ?? {items: []});
   
   export default initialTransCtgryTypeState;
   

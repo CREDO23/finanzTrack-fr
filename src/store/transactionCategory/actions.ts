@@ -11,18 +11,18 @@ interface TransCtgryPayloadType {
 interface TransCtgryAction {
   type: TransCtgryActionType;
   payload: TransCtgryPayloadType[TransCtgryAction['type']];
-}``
+}
 
 /** ======= Handlers ========== */
 
 function setCategories(
-  payload: TransCtgryState["items"],
-): TransCtgryState["items"] {
+  payload: ITransCtgryState["items"],
+): ITransCtgryState["items"] {
 
   return payload;
 }
 
-function setLoading(payload: TransCtgryPayloadType["SET_LOADING"]): TransCtgryState['loading'] {
+function setLoading(payload: TransCtgryPayloadType["SET_LOADING"]): ITransCtgryState['loading'] {
   return payload;
 }
 

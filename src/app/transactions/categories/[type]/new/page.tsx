@@ -5,9 +5,25 @@ import { useParams } from 'next/navigation';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { defaultValues, newCategorySchema } from './validation';
+import APICall from '@/helpers/apiCall';
+import { AxiosResponse } from 'axios';
+import useAxiosAction from '@/hooks/useAction';
+import { useEffect } from 'react';
+import { message } from 'antd';
+import { useTransCtgryTypes } from '@/store/transactionCategoryType/provider';
+import { useTransCtgryDispatcher } from '@/store/transactionCategory/hooks';
 
 export default function NewTransactionCategory(): JSX.Element {
   const { type } = useParams();
+  const types = useTransCtgryTypes()
+  const dispatchTransCatgry = useTransCtgryDispatcher()
+
+
+  const addTransactionCategory = async (data : ITransactionCategory) : Promise<AxiosResponse<IAPIResponse<ITransactionCategory>>> => {
+      return APICall.post('/transaction_categories', {data}, '')
+  }
+
+  const [addTransactionCategoryAction, {loading, data, error}] = useAxiosAction<ITransactionCategory,{category : ITransactionCategory, type_id : string}>(addTransactionCategory)
 
   const { control, handleSubmit } = useForm({
     defaultValues,
@@ -15,11 +31,34 @@ export default function NewTransactionCategory(): JSX.Element {
     reValidateMode: 'onChange',
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = (data: ITransactionCategory) => {
+      addTransactionCategoryAction({
+        type_id : types.items.find(el => el.label == type)?.id as string,
+        category : {
+          ...data
+        }
+      })
   };
 
+  const [msg, msgContext ] = message.useMessage()
+
+  useEffect(() => {
+
+    if(data){
+        msg.success(data.data.message)
+        console.log(data.data.data)
+    }
+
+    if(error){
+      msg.error(error.response?.data.message)
+
+    }
+
+  },[loading])
+
   return (
+    <>
+    {msgContext}
     <div className="w-full h-full flex flex-col ">
       <div
         className={`w-full text-center ${
@@ -68,5 +107,6 @@ export default function NewTransactionCategory(): JSX.Element {
         </Button>
       </form>
     </div>
+    </>
   );
 }

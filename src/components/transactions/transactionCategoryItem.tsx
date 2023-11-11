@@ -6,7 +6,7 @@ export default function TransactionGategoryItem({
   description,
 }: {
   name: string;
-  type: 'income' | 'expense';
+  type: 'incomes' | 'expenses';
   description: string;
 }) {
   return (
@@ -15,7 +15,7 @@ export default function TransactionGategoryItem({
     >
       <div className="h-full justify-between flex flex-col ">
         <p className={` font-medium capitalize ${
-        type == 'income' ? ' text-cgreen' : type == 'expense' ? ' text-cred' : ''
+        type == 'incomes' ? ' text-cgreen' : type == 'expenses' ? ' text-cred' : ''
       }`}>{name}</p>
         <p className="text-cgray text-sm">
           {description.length > 65 ? description.substring(0, 63) + ' ...' : description}
