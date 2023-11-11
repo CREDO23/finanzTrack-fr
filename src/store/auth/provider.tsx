@@ -4,6 +4,7 @@ import {
   Dispatch,
   ReactNode,
   createContext,
+  memo,
   useEffect,
   useReducer,
 } from 'react';
@@ -19,7 +20,7 @@ export const AuthDispatcher = createContext<
   Dispatch<AuthAction> | (() => null)
 >(() => null);
 
-export default function AuthProvider({
+export default memo(function AuthProvider({
   children,
 }: {
   children: ReactNode;
@@ -42,4 +43,4 @@ export default function AuthProvider({
       </AuthDispatcher.Provider>
     </AuthContext.Provider>
   );
-}
+})

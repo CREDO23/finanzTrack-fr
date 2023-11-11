@@ -3,47 +3,19 @@
 import TransactionItem from '@/components/transactions/transactionItem';
 import { BiSolidArrowFromBottom, BiSolidArrowFromTop } from 'react-icons/bi';
 import { transactionsCategories } from '@/components/transactions/categories';
-import { useEffect } from 'react';
+import { memo } from 'react';
 import { useViewDispatcher } from '@/store/viewState/hooks';
 import { ViewActionType } from '@/store/viewState/action';
 import { useAuth } from '@/store/auth/hooks';
 import Link from 'next/link';
-import useAxiosAction from '@/hooks/useAction';
-import { AxiosResponse } from 'axios';
-import APICall from '@/helpers/apiCall';
-import { useTransCtgryDispatcher } from '@/store/transactionCategory/hooks';
-import { TransCtgryActionType } from '@/store/transactionCategory/actions';
 
-export default function Home(): JSX.Element {
+
+export default memo(function Home(): JSX.Element {
 
   const dispatchView = useViewDispatcher();
-  const dispatchTransCtgry = useTransCtgryDispatcher()
-
-  useEffect(() => {
-    dispatchView({ type: ViewActionType.SET_NAVIGATION, payload: true });
-  }, []);
-
   const currentUser = useAuth();
+  
 
-  const fetchAllTransactionCategories = async () : Promise<AxiosResponse<IAPIResponse<ITransactionCategory[]>>> => {
-        return await APICall.get('/transactions/', {}, '')
-  }
-
-  const [fetchAllTransactionCategoriesAction, {loading, data}] = useAxiosAction(fetchAllTransactionCategories)
-
-
-  useEffect(() => {
-
-    fetchAllTransactionCategoriesAction()
-
-    if(data){
-        dispatchTransCtgry({
-          type : TransCtgryActionType.SET_CATEGORIES,
-          payload : data.data.data as ITransactionCategory[]
-        })
-    }
-
-  },[loading])
 
   const totalTransactions = [
     { name: 'expenses', totalAmount: 12000, icon: <BiSolidArrowFromTop /> },
@@ -77,6 +49,7 @@ export default function Home(): JSX.Element {
 
 
   return (
+    <>
     <div className="w-full font-light h-full flex flex-col gap-12  bg-gradient-to-b top-0 left-0 from-[#FFF6E5] via-white to-white pt-10 px-4 overflow-auto">
       <div className="w-full flex flex-col gap-7">
         <div className="w-full  h-0 flex items-center">
@@ -164,5 +137,6 @@ export default function Home(): JSX.Element {
         </div>
       </div>
     </div>
+    </>
   );
-}
+})

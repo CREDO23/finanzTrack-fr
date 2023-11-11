@@ -14,7 +14,7 @@ const montserrat = Montserrat({ subsets: ['latin'] });
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <Providers font={montserrat}>{children}</Providers>
+      <Providers>{children}</Providers>
     </html>
   );
 }

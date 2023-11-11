@@ -17,11 +17,9 @@ interface TransCtgryAction {
 
 function setCategories(
   payload: TransCtgryState["items"],
-  previousState: TransCtgryState["items"]
 ): TransCtgryState["items"] {
-  const updatedCategories = [...payload, ...previousState];
 
-  return updatedCategories;
+  return payload;
 }
 
 function setLoading(payload: TransCtgryPayloadType["SET_LOADING"]): TransCtgryState['loading'] {
