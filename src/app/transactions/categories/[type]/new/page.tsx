@@ -1,7 +1,7 @@
 'use client';
 import Button from '@/components/shared/button';
 import Input from '@/components/shared/input';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useForm, Controller } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import { defaultValues, newCategorySchema } from './validation';
@@ -12,11 +12,13 @@ import { useEffect } from 'react';
 import { message } from 'antd';
 import { useTransCtgryTypes } from '@/store/transactionCategoryType/provider';
 import { useTransCtgryDispatcher } from '@/store/transactionCategory/hooks';
+import { TransCtgryActionType } from '@/store/transactionCategory/actions';
 
 export default function NewTransactionCategory(): JSX.Element {
   const { type } = useParams();
   const types = useTransCtgryTypes()
   const dispatchTransCatgry = useTransCtgryDispatcher()
+  const router = useRouter()
 
 
   const addTransactionCategory = async (data : ITransactionCategory) : Promise<AxiosResponse<IAPIResponse<ITransactionCategory>>> => {
@@ -46,7 +48,11 @@ export default function NewTransactionCategory(): JSX.Element {
 
     if(data){
         msg.success(data.data.message)
-        console.log(data.data.data)
+        dispatchTransCatgry({
+          type : TransCtgryActionType.ADD_CATEGORY,
+          payload : data.data.data
+        })
+        router.push('/transactions/categories')
     }
 
     if(error){
@@ -102,7 +108,7 @@ export default function NewTransactionCategory(): JSX.Element {
             )}
           />
         </div>
-        <Button type="primary" block size="big">
+        <Button loading={loading} type="primary" block size="big">
           Add Category
         </Button>
       </form>
