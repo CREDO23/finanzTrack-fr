@@ -15,6 +15,7 @@ export default function AllTransactionsCategories(): JSX.Element {
 
   useEffect(() => {
     dispatchView({type : ViewActionType.SET_ARROW_BACK, payload : true})
+    dispatchView({type : ViewActionType.SET_NAVIGATION, payload : true})
   }, [])
 
   return (

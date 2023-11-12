@@ -3,7 +3,8 @@ import {
   TransCtgryActionType,
   TransCtgryPayloadType,
   setLoading,
-  setCategories
+  setCategories,
+  addCategory
 } from './actions';
 
 export default function transCtgryReducer(
@@ -16,6 +17,10 @@ export default function transCtgryReducer(
         action.payload as TransCtgryPayloadType['SET_CATEGORIES']
       );
       return { ...state, items: newCategories };
+
+    case TransCtgryActionType.ADD_CATEGORY:
+      const updatedCategories = addCategory(action.payload as ITransactionCategory, state.items)
+      return { ...state, items: updatedCategories };
 
     case TransCtgryActionType.SET_LOADING:
       const loading = setLoading(action.payload as TransCtgryPayloadType['SET_LOADING']);
