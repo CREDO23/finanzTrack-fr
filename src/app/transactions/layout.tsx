@@ -54,7 +54,6 @@ export default function Layout({ children }: { children: ReactNode }): JSX.Eleme
     });
   }, []);
 
-  console.log(!type);
   return (
     <div className="w-full  h-full  flex flex-col gap-4">
       {pathname.split('/')[pathname.split('/').length - 1] != 'new' &&

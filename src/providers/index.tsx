@@ -26,17 +26,19 @@ const TransCtgryTypeProvider = dynamic(() => import('@/store/transactionCategory
   ssr: false,
 });
 
+const TransactionProvider = dynamic(() => import('@/store/transactions/provider'), {
+  ssr: false,
+});
+
 const montserrat = Montserrat({ subsets: ['latin'] });
 
-export default function Providers({ children}: { children: ReactNode}): JSX.Element {
-
-  const pathname = usePathname()
+export default function Providers({ children }: { children: ReactNode }): JSX.Element {
+  const pathname = usePathname();
 
   return (
     <body
       className={`${montserrat.className} min-h-[100vdh] h-[100dvh] flex items-center justify-center flex-col  overflow-hidden `}
     >
-      
       <ConfigProvider
         theme={{
           token: {
@@ -48,9 +50,15 @@ export default function Providers({ children}: { children: ReactNode}): JSX.Elem
         <WebStorageProvider>
           <AuthProvider>
             <TransCtgryTypeProvider>
-            <TransCtgryProvider>
-            {pathname.split('/')[1] == 'ladding_page' ? children :  <ViewProvider>{children}</ViewProvider>}
-            </TransCtgryProvider>
+              <TransCtgryProvider>
+                <TransactionProvider>
+                  {pathname.split('/')[1] == 'ladding_page' ? (
+                    children
+                  ) : (
+                    <ViewProvider>{children}</ViewProvider>
+                  )}
+                </TransactionProvider>
+              </TransCtgryProvider>
             </TransCtgryTypeProvider>
           </AuthProvider>
         </WebStorageProvider>
