@@ -1,13 +1,13 @@
 import * as joi from 'joi';
 
 const defaultValues = {
-  category: '',
+  category_id: '',
   description: '',
   amount: 0,
 };
 
 const newTransactionSchema = joi.object({
-    category: joi
+    category_id: joi
       .string()
       .required()
       .messages({

@@ -35,7 +35,7 @@ export default function AllTransactions(): JSX.Element {
             icon={
               {
                 ...(transactionsCategories[category] ??
-                  transactionsCategories[type.substring(0, type.length - 1)]),
+                  transactionsCategories[type?.substring(0, type.length - 1)]),
               }.icon
             }
             title={
@@ -46,8 +46,8 @@ export default function AllTransactions(): JSX.Element {
             key={key}
             color={
               {
-                ...(transactionsCategories[item.category?.name as string] ??
-                  transactionsCategories[item.category?.type?.label as string]),
+                ...(transactionsCategories[item?.category?.name as string] ??
+                  transactionsCategories[item?.category?.type?.label as string]),
               }.color
             }
           />

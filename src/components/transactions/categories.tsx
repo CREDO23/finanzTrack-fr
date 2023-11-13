@@ -60,7 +60,7 @@ export const transactionsCategories : {[key : string] : {icon : ReactNode, color
   },
   'expense': {
     color: 'rgb(255, 165, 0)',
-    icon: <span className=' border h-full w-full rounded-lg flex items-center justify-center'>Exp</span>,
+    icon: <span className=' border h-full w-full rounded-lg flex items-center justify-center'>Ex</span>,
     type: 'expense',
     description: 'Some information about'
   },
