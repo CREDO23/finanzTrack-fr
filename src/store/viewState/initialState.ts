@@ -2,7 +2,7 @@ const initialViewState: ViewState = typeof window !== 'undefined' &&( (JSON.pars
   localStorage?.getItem('root') as string
 ) &&
   JSON.parse(localStorage?.getItem('root') as string)['view']) ?? {
-  showNavBar: true,
+  showNavBar: false,
   inAction: false,
   tab : 'home',
   showArrowBack : false,

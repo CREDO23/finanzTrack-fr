@@ -9,6 +9,7 @@ import { ViewActionType } from '@/store/viewState/action';
 import { useAuth } from '@/store/auth/hooks';
 import Link from 'next/link';
 import { useTransactions } from '@/store/transactions/hooks';
+import {ImSpinner2} from 'react-icons/im'
 
 
 export default memo(function Home(): JSX.Element {
@@ -24,10 +25,25 @@ export default memo(function Home(): JSX.Element {
     })
   },[])
 
+  let expenses = 0
+  let incomes = 0
+
+  for(let i = 0; i < transactions.items.length; i++) {
+    const type = transactions.items[i].category?.type?.label
+    const amount = transactions.items[i].amount
+
+    if(type == 'expenses'){
+        expenses += amount
+    }
+
+    if(type == 'incomes'){
+      incomes += amount
+  }
+  }
 
   const totalTransactions = [
-    { name: 'expenses', totalAmount: 12000, icon: <BiSolidArrowFromTop /> },
-    { name: 'incomes', totalAmount: 9400, icon: <BiSolidArrowFromBottom /> },
+    { name: 'expenses', totalAmount: expenses, icon: <BiSolidArrowFromTop /> },
+    { name: 'incomes', totalAmount: incomes, icon: <BiSolidArrowFromBottom /> },
   ];
 
   return (
@@ -44,7 +60,7 @@ export default memo(function Home(): JSX.Element {
         </div>
         <div className="w-full flex items-center justify-center flex-col gap-2">
           <p className=" font-light text-sm text-gray-500">Account Balance</p>
-          <p className=" text-5xl font-semibold">$9400</p>
+          <p className=" text-5xl font-semibold">${incomes - expenses}</p>
         </div>
         <div className="w-full flex items-center justify-center gap-12 ">
           {totalTransactions.map(el => {
@@ -72,11 +88,6 @@ export default memo(function Home(): JSX.Element {
         </div>
       </div>
       <div className="w-full flex flex-col gap-8">
-        {/* <div className="w-full flex flex-col gap-4">
-          <p className=" font-medium text-xl">Spend frequency</p>
-      <span>Chart</span>
-          
-        </div> */}
         <div className="w-full flex flex-col gap-4">
           <div className="w-full flex items-center justify-between">
             <p className=" font-medium text-xl">Recent transactions</p>
@@ -91,11 +102,13 @@ export default memo(function Home(): JSX.Element {
               </Link>
           </div>
           <ul className="w-full flex flex-col items-center gap-2 ">
-            {transactions.items?.map((item, key) => {
+            {transactions.loading && <span className=' animate-spin'><ImSpinner2/></span>}
+            {!transactions.loading && transactions.items?.map((item, key) => {
 
               const category = item.category?.name as string
               const type =  item.category?.type?.label as string
 
+              if(key < 5){
               return (
                 <TransactionItem
                   type={type?.substring(0, type.length - 1) as 'income' | 'expense'}
@@ -118,6 +131,7 @@ export default memo(function Home(): JSX.Element {
                   }
                 />
               );
+                }
             })}
           </ul>
         </div>

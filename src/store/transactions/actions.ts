@@ -1,11 +1,13 @@
 enum TransactionActionType {
   'SET_TRANSACTIONS' = 'SET_TRANSACTIONS',
   'ADD_TRANSACTION' = 'ADD_TRANSACTION',
+  'SET_LOADING' = 'SET_LOADING',
 }
 
 interface TransactionPayloadType {
   SET_TRANSACTIONS: ITransactionState["items"];
   ADD_TRANSACTION: ITransaction;
+  SET_LOADING: boolean;
 }
 
 
@@ -26,5 +28,9 @@ function addTransaction (payload: ITransaction, previousState :ITransactionState
 }
 
 
-export {setTransactions, addTransaction, TransactionActionType}
+function setLoading(payload: TransactionPayloadType['SET_LOADING']): ITransactionState['loading'] {
+  return payload;
+}
+
+export {setTransactions, addTransaction, setLoading, TransactionActionType}
 export type {TransactionAction, TransactionPayloadType}
