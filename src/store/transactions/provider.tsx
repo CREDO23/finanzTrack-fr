@@ -31,6 +31,7 @@ export default function TransactionsProvider({ children }: { children: ReactNode
   }, []);
 
   useEffect(() => {
+
     if (data) {
      dispatcher({
         type : TransactionActionType.SET_TRANSACTIONS,
@@ -41,6 +42,12 @@ export default function TransactionsProvider({ children }: { children: ReactNode
     if (error) {
       msg.error(error.response?.data.message);
     }
+
+    dispatcher({
+      type : TransactionActionType.SET_LOADING,
+      payload : loading
+   })
+
   }, [loading]);
 
   useEffect(() => {

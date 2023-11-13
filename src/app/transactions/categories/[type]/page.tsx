@@ -11,7 +11,7 @@ export default function TransactionsCategories(): JSX.Element {
   const transCtgries = useTransCtgry()
 
   return (
-    <ul className="w-full px-3 h-full overflow-auto flex flex-col items-center gap-2 ">
+    <ul className="w-full h-full overflow-auto flex flex-col items-center gap-2 ">
       {transCtgries.items?.filter(el => el.type?.label == type.toString().substring(0,type.length)).map((item, key) => {
         return (
           <TransactionGategoryItem
