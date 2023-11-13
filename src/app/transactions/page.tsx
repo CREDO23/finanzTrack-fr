@@ -24,7 +24,7 @@ export default function AllTransactions(): JSX.Element {
   }, []);
 
   return (
-    <ul className="w-full h-full overflow-auto flex flex-col items-center gap-2 ">
+    <ul className="w-full px-3 h-full overflow-auto flex flex-col items-center gap-2 ">
       {transactions.items?.map((item, key) => {
         const category = item.category?.name as string;
         const type = item.category?.type?.label as string;

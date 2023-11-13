@@ -88,11 +88,6 @@ export default memo(function Home(): JSX.Element {
         </div>
       </div>
       <div className="w-full flex flex-col gap-8">
-        {/* <div className="w-full flex flex-col gap-4">
-          <p className=" font-medium text-xl">Spend frequency</p>
-      <span>Chart</span>
-          
-        </div> */}
         <div className="w-full flex flex-col gap-4">
           <div className="w-full flex items-center justify-between">
             <p className=" font-medium text-xl">Recent transactions</p>
