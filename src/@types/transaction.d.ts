@@ -7,3 +7,8 @@ interface ITransCtgryTypeState{
    items : ITransactionCategoryType[],
    loading : boolean
 } 
+
+interface ITransactionState {
+   items : ITransaction[],
+   loading : boolean
+}

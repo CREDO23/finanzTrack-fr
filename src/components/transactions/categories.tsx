@@ -60,7 +60,7 @@ export const transactionsCategories : {[key : string] : {icon : ReactNode, color
   },
   'expense': {
     color: 'rgb(255, 165, 0)',
-    icon: <span>Exp</span>,
+    icon: <span className=' border h-full w-full rounded-lg flex items-center justify-center'>Exp</span>,
     type: 'expense',
     description: 'Some information about'
   },
@@ -91,7 +91,7 @@ export const transactionsCategories : {[key : string] : {icon : ReactNode, color
   },
   'income' : {
       color : 'rgb(139, 100, 60)',
-      icon : <span>In</span>,
+      icon : <span className=' border h-full w-full rounded-lg flex items-center justify-center'>In</span>,
       type: 'income',
       description: 'Some information about'
   }

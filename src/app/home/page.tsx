@@ -8,12 +8,14 @@ import { useViewDispatcher } from '@/store/viewState/hooks';
 import { ViewActionType } from '@/store/viewState/action';
 import { useAuth } from '@/store/auth/hooks';
 import Link from 'next/link';
+import { useTransactions } from '@/store/transactions/hooks';
 
 
 export default memo(function Home(): JSX.Element {
 
   const dispatchView = useViewDispatcher();
   const currentUser = useAuth();
+  const transactions = useTransactions()
   
   useEffect(() => {
     dispatchView({
@@ -27,32 +29,6 @@ export default memo(function Home(): JSX.Element {
     { name: 'expenses', totalAmount: 12000, icon: <BiSolidArrowFromTop /> },
     { name: 'incomes', totalAmount: 9400, icon: <BiSolidArrowFromBottom /> },
   ];
-
-  const transactions = [
-    {
-      category: 'groceries',
-      amount: 300,
-      description: 'Monthly grocery shopping',
-      type: 'expense',
-    },
-    { category: 'housing', amount: 1200, description: 'Monthly rent payment', type: 'expense' },
-    {
-      category: 'healthcare',
-      amount: 150,
-      description: 'Electricity and water bill',
-      type: 'expense',
-    },
-   
-    { category: 'education', amount: 400, description: 'Student loan payment', type: 'expense' },
-    { category: 'education', amount: 100, description: 'Art supplies', type: 'expense' },
-    { category: 'salary', amount: 5000, description: 'Monthly paycheck', type: 'income' },
-    { category: 'freelance', amount: 1200, description: 'Web development project', type: 'income' },
-    { category: 'investments', amount: 300, description: 'Stock dividends', type: 'income' },
-    { category: 'side Job', amount: 600, description: 'Part-time gig', type: 'income' },
-    { category: 'rental Income', amount: 800, description: 'Apartment rent', type: 'income' },
-  ];
-
-
 
   return (
     <>
@@ -115,25 +91,29 @@ export default memo(function Home(): JSX.Element {
               </Link>
           </div>
           <ul className="w-full flex flex-col items-center gap-2 ">
-            {transactions.map((item, key) => {
+            {transactions.items?.map((item, key) => {
+
+              const category = item.category?.name as string
+              const type =  item.category?.type?.label as string
+
               return (
                 <TransactionItem
-                  type={item.type as 'income' | 'expense'}
+                  type={type?.substring(0, type.length - 1) as 'income' | 'expense'}
                   description={item.description}
                   date="12/10/2014"
                   amount={item.amount}
                   icon={
                     {
-                      ...(transactionsCategories[item.category] ??
-                        transactionsCategories[item.type]),
+                      ...(transactionsCategories[category] ??
+                        transactionsCategories[type.substring(0, type.length - 1)]),
                     }.icon
                   }
-                  title={transactionsCategories[item.category] ? item.category : item.type}
+                  title={transactionsCategories[item.category?.name as string] ? item.category?.name as string : item.category?.type?.label as string}
                   key={key}
                   color={
                     {
-                      ...(transactionsCategories[item.category] ??
-                        transactionsCategories[item.type]),
+                      ...(transactionsCategories[item.category?.name as string] ??
+                        transactionsCategories[item.category?.type?.label as string]),
                     }.color
                   }
                 />

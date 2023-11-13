@@ -38,7 +38,7 @@ interface ITransactionCategory {
 
 interface ITransaction {
   id?: string;
-  amount?: number;
+  amount: number;
   description: string;
   category_id?: string;
   category? : ITransactionCategory
