@@ -16,6 +16,8 @@ import { useTransCtgryTypes } from '@/store/transactionCategoryType/provider';
 import { useTransactionDispatcher } from '@/store/transactions/hooks';
 import { TransCtgryActionType } from '@/store/transactionCategory/actions';
 import { TransactionActionType } from '@/store/transactions/actions';
+import { ViewActionType } from '@/store/viewState/action';
+import { useViewDispatcher } from '@/store/viewState/hooks';
 
 export default function NewTransaction(): JSX.Element {
   const { type } = useParams();
@@ -23,6 +25,7 @@ export default function NewTransaction(): JSX.Element {
   const [msg, msgCtx] = message.useMessage();
   const dispatchTransaction = useTransactionDispatcher();
   const router = useRouter()
+  const dispatchView = useViewDispatcher();
 
   const { handleSubmit, control } = useForm({
     defaultValues,
@@ -54,6 +57,14 @@ export default function NewTransaction(): JSX.Element {
         payload: data.data.data,
       });
       router.push('/transactions')
+      dispatchView({
+        type: ViewActionType.SET_ARROW_BACK,
+        payload: false,
+      });
+      dispatchView({
+        type: ViewActionType.SET_NAVIGATION,
+        payload: true,
+      });
     }
 
     if (error) {
@@ -107,7 +118,7 @@ export default function NewTransaction(): JSX.Element {
                 <Select
                   label={<span className=" text-cgray">Category</span>}
                   size="large"
-                  options={transactionCategories.items.map(item => ({
+                  options={transactionCategories.items.filter(el => el.type?.label == type).map(item => ({
                     label: item.name,
                     value: item.id,
                   }))}

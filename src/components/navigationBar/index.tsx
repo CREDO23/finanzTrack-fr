@@ -26,7 +26,7 @@ export default function NavigationBar(): JSX.Element {
     {
       label: 'repports',
       icon: <TbReport />,
-      path: '/reports',
+      path: '/repports',
     },
     {
       label: 'add',

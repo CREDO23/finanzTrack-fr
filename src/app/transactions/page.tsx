@@ -10,13 +10,16 @@ import { useEffect } from 'react';
 
 export default function AllTransactions(): JSX.Element {
   const transactions = useTransactions();
-
   const dispatchView = useViewDispatcher();
 
   useEffect(() => {
     dispatchView({
       type: ViewActionType.SET_ARROW_BACK,
       payload: false,
+    });
+    dispatchView({
+      type: ViewActionType.SET_NAVIGATION,
+      payload: true,
     });
   }, []);
 

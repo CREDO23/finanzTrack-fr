@@ -15,11 +15,11 @@ export default function AllTransactionsCategories(): JSX.Element {
 
   useEffect(() => {
     dispatchView({type : ViewActionType.SET_ARROW_BACK, payload : true})
-    dispatchView({type : ViewActionType.SET_NAVIGATION, payload : true})
+    dispatchView({type : ViewActionType.SET_NAVIGATION, payload : false})
   }, [])
 
   return (
-    <ul className="w-full px-3 h-full overflow-auto flex flex-col items-center gap-2 ">
+    <ul className="w-full h-full overflow-auto flex flex-col items-center gap-2 ">
       {transCtgries.items?.map((item, key) => {
         return (
           <TransactionGategoryItem

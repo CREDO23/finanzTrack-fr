@@ -13,12 +13,15 @@ import { message } from 'antd';
 import { useTransCtgryTypes } from '@/store/transactionCategoryType/provider';
 import { useTransCtgryDispatcher } from '@/store/transactionCategory/hooks';
 import { TransCtgryActionType } from '@/store/transactionCategory/actions';
+import { useViewDispatcher } from '@/store/viewState/hooks';
+import { ViewActionType } from '@/store/viewState/action';
 
 export default function NewTransactionCategory(): JSX.Element {
   const { type } = useParams();
   const types = useTransCtgryTypes()
   const dispatchTransCatgry = useTransCtgryDispatcher()
   const router = useRouter()
+  const dispatchView =  useViewDispatcher()
 
 
   const addTransactionCategory = async (data : ITransactionCategory) : Promise<AxiosResponse<IAPIResponse<ITransactionCategory>>> => {
