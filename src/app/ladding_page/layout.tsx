@@ -42,7 +42,7 @@ export default function Layout({ children }: { children: JSX.Element }) {
       </div>
       <div className="w-full h-[calc(100%-120px)] p-3">{children}</div>
       <div className="h-[60px] bg-[#1D2B3A] text-white fixed bottom-0 z-20 w-full flex flex-row items-center justify-evenly">
-        © 2023 Finanz Track. All Rights Reserved.
+      Copyright (c) [2023] [CREDO23]
       </div>
     </div>
   );
