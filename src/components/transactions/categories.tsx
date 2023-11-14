@@ -9,6 +9,12 @@ import { MdCastForEducation } from 'react-icons/md';
 import { IoFitnessOutline, IoGiftOutline } from 'react-icons/io5';
 import { ReactNode } from 'react';
 
+/**
+ * Here, i define supported transactions categories,
+ * I a user has a transaction category that
+ * exists here, the app will be using customized icon and color for it in a list
+ */
+
 export const transactionsCategories : {[key : string] : {icon : ReactNode, color : string, type : 'income' | 'expense' , description : string}} = {
   housing: {
     icon: <BsHouse />,

@@ -19,24 +19,30 @@ export default function TransactionsProvider({ children }: { children: ReactNode
   const storageDispatch = useStorageDispatcher();
   const [msg, msgCtx] = message.useMessage();
 
+  // Fetch all transactios
   const fetchAllTransactions = (): Promise<AxiosResponse<IAPIResponse<ITransaction[]>>> => {
     return APICall.get('/transactions', {}, '');
   };
 
+  // Create a new axios action (fetchAllTransactions)
   const [fetchAllTransactionsAction, { loading, data, error }] =
     useAxiosAction(fetchAllTransactions);
 
+  // Fetch all transactions onLoad
   useEffect(() => {
     fetchAllTransactionsAction();
   }, []);
 
+  /*
+   * Track the loading state to either set all categories to the
+   * storage or show an error message in the UI
+   **/
   useEffect(() => {
-
     if (data) {
-     dispatcher({
-        type : TransactionActionType.SET_TRANSACTIONS,
-        payload : data.data.data
-     })
+      dispatcher({
+        type: TransactionActionType.SET_TRANSACTIONS,
+        payload: data.data.data,
+      });
     }
 
     if (error) {
@@ -44,12 +50,14 @@ export default function TransactionsProvider({ children }: { children: ReactNode
     }
 
     dispatcher({
-      type : TransactionActionType.SET_LOADING,
-      payload : loading
-   })
-
+      type: TransactionActionType.SET_LOADING,
+      payload: loading,
+    });
   }, [loading]);
 
+  /**
+   * I there is a change in the tTransaction categories context, set it to the storage
+   */
   useEffect(() => {
     storageDispatch({
       type: BrowserStorageActionType.SET_DATA,

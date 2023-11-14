@@ -30,20 +30,28 @@ export default memo(function TransCtgryTypeProvider({
   const [state, setState] = useState<ITransCtgryTypeState>(initialTransCtgryTypeState);
   const [msg, msgContext] = message.useMessage();
   const dispatchStorage = useStorageDispatcher();
+
+  // Fetch all categories
   const fetchAllTransactionCategories = async (): Promise<
     AxiosResponse<IAPIResponse<ITransactionCategoryType[]>>
   > => {
     return await APICall.get('/transaction_category_types/', {}, '');
   };
 
+  // Create a new action (Fetch all categories)
   const [fetchAllTransactionCategoryTypeAction, { loading, data, error }] = useAxiosAction(
     fetchAllTransactionCategories
   );
 
+  // Fetch all categories onLoad
   useEffect(() => {
     fetchAllTransactionCategoryTypeAction();
   }, []);
 
+  /*
+   * Track the loading state to either set all categories to the
+   * storage or show an error message in the UI
+   **/
   useEffect(() => {
     if (data) {
       setState({ ...state, items: data.data.data });
@@ -53,6 +61,9 @@ export default memo(function TransCtgryTypeProvider({
     }
   }, [loading]);
 
+  /**
+   * I there is a change in the tTransaction category types context, set it to the storage
+   */
   useEffect(() => {
     dispatchStorage({
       type: BrowserStorageActionType.SET_DATA,
