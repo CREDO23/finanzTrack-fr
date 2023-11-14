@@ -10,6 +10,9 @@ A comprehensive financial tracking application that assists users in managing th
 
 - Blog post:
 - Author: CREDO23 <bakerathierry@gmail.com>
+- Live link: [FinanzTrack](https://finanztrack.vercel.app/)
+- Api : [FinanzTrack API](https://github.com/CREDO23/finanzTrack-bc)
+
 
 
 ### FEATURES
@@ -40,7 +43,7 @@ In this section, you can also see transactions categories and create new one.
 
 ### SCREENSHOTS
 
-<div>
+<div style="display:flex;">
 <img src='./public/screenshots/singin.png'>
 <img src='./public/screenshots/dashboard.png'>
 <img src='./public/screenshots/new.png'>
@@ -58,7 +61,7 @@ Whether you're a developer, designer, or someone passionate about improving fina
 1. **Fork the Repository** : Start by forking the FinanzTrack repository to your own GitHub account.
 2. **Clone the Repository** : Clone the forked repository to your local machine using the following command:
 ```bash
-    git clone https://github.com/your-username/FinTrack.git
+    git clone https://github.com/CREDO23/finanzTrack-fr.git
 ```
 3. **Create a Branch** : Create a new branch for your contribution. Use a descriptive branch name that summarizes your changes.
 ```bash
