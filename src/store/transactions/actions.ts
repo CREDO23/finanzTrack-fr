@@ -10,7 +10,12 @@ interface TransactionPayloadType {
   SET_LOADING: boolean;
 }
 
-
+/**
+ * @interface TransactionAction: The action interface for the Transactions reducer
+ * 
+ * @field type: The action type : (@example "ADD_TRANSACTION")
+ * @field payload: The payload for an action (@see TransactionPayloadType)
+ */
 interface TransactionAction {
     type : TransactionActionType;
     payload : TransactionPayloadType[TransactionAction["type"]]

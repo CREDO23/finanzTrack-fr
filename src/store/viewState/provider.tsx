@@ -22,6 +22,7 @@ export default memo(function ViewProvider({ children }: { children: ReactNode })
 
   const router = useRouter();
 
+  // If there is a change, set it to the storage
   useEffect(() => {
     storageDispatch({
       type: BrowserStorageActionType.SET_DATA,

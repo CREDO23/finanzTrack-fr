@@ -10,6 +10,12 @@ interface TransCtgryPayloadType {
   ADD_CATEGORY: ITransactionCategory;
 }
 
+/**
+ * @interface TransCtgryAction: The action interface for the Transaction categories reducer
+ * 
+ * @field type: The action type : (@example "ADD_CATEGORY")
+ * @field payload: The payload for an action (@see TransCtgryPayloadType)
+ */
 interface TransCtgryAction {
   type: TransCtgryActionType;
   payload: TransCtgryPayloadType[TransCtgryAction['type']];

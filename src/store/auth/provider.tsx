@@ -16,10 +16,17 @@ import { BrowserStorageActionType } from '../browser/actions';
 
 
 export const AuthContext = createContext<AuthState>(initialAuthContext);
+
+/**
+ * @alias AuthDispatcher: The dispatcher for handling the authContext
+ */
 export const AuthDispatcher = createContext<
   Dispatch<AuthAction> | (() => null)
 >(() => null);
 
+/**
+ * AuthProvider : A provider that provides access to the AuthContext and AuthDispatcher
+ */
 export default memo(function AuthProvider({
   children,
 }: {
@@ -29,6 +36,9 @@ export default memo(function AuthProvider({
 
   const storageDispatch = useStorageDispatcher();
 
+  /**
+   * If there is a change in the AuthContext, we need to set it in the browser storage
+   */
   useEffect(() => {
     storageDispatch({
       type: BrowserStorageActionType.SET_DATA,

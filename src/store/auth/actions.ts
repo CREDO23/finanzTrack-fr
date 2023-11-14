@@ -10,6 +10,12 @@ interface AuthPayloadType {
   SET_ACCESS_TOKEN: string | null;
 }
 
+/**
+ * @interface AuthAction: The action interface for the AuthContext reducer
+ * 
+ * @field type: The action type : (@example "SET_USER")
+ * @field payload: The payload for an action (@see AuthPayloadType)
+ */
 interface AuthAction {
   type: AuthActionType;
   payload: AuthPayloadType[AuthAction["type"]];

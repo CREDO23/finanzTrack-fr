@@ -12,6 +12,12 @@ interface ViewPayloadType {
   SET_ARROW_BACK : ViewState["showArrowBack"];
 }
 
+/**
+ * @interface ViewAction: The action interface for the View reducer
+ * 
+ * @field type: The action type : (@example "SET_ARROW_BACK")
+ * @field payload: The payload for an action (@see ViewPayloadType)
+ */
 interface ViewAction {
   type: ViewActionType;
   payload: ViewPayloadType[ViewAction['type']];

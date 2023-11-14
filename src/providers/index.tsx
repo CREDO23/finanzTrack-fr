@@ -6,7 +6,14 @@ import dynamic from 'next/dynamic';
 import { Montserrat } from 'next/font/google';
 import '../app/globals.css';
 import { usePathname } from 'next/navigation';
-import { NextFont } from 'next/dist/compiled/@next/font';
+
+
+/**
+ * This is where i put togeter all providers (state, style, etc)
+ * 
+ * - State providers are imported dynamically and not loaded in the server rendering
+ * since they use the web browser's storage.
+ */
 
 const WebStorageProvider = dynamic(() => import('@/store/browser/provider'), {
   ssr: false,

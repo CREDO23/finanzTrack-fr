@@ -1,6 +1,13 @@
 import type { AxiosError, AxiosResponse } from 'axios';
 import { useState } from 'react';
 
+/**
+ * A hook that helps me to handle asynchronous requests (Axios)
+ * 
+ * @param action The action that will be executed
+ * @returns [performAction, {loaading, error, response}]
+ */
+
 function useAxiosAction<S,A = void>(action: (actionArg: any) => Promise<AxiosResponse<IAPIResponse<S>>>): [
   (arg: A) => Promise<{
     data: AxiosResponse<IAPIResponse<S>> | null;
