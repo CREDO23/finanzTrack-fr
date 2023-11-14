@@ -19,7 +19,7 @@ export default function AllTransactionsCategories(): JSX.Element {
   }, [])
 
   return (
-    <ul className="w-full px-3 h-full overflow-auto flex flex-col items-center gap-2 ">
+    <ul className="w-full h-full overflow-auto flex flex-col items-center gap-2 ">
       {transCtgries.items?.map((item, key) => {
         return (
           <TransactionGategoryItem
