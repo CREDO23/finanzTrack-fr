@@ -46,14 +46,6 @@ export default function Layout({ children }: { children: ReactNode }): JSX.Eleme
   const pathname = usePathname();
 
 
-  useEffect(() => {
-
-    dispatchView({
-      type: ViewActionType.SET_NAVIGATION_TAB,
-      payload: 'trans',
-    });
-  }, []);
-
   return (
     <div className="w-full  h-full  flex flex-col gap-4">
       {pathname.split('/')[pathname.split('/').length - 1] != 'new' && (

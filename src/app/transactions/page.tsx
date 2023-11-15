@@ -23,6 +23,8 @@ export default function AllTransactions(): JSX.Element {
     });
   }, []);
 
+
+
   return (
     <ul className="w-full px-3 h-full overflow-auto flex flex-col items-center gap-2 ">
       {transactions.items?.map((item, key) => {
@@ -33,7 +35,7 @@ export default function AllTransactions(): JSX.Element {
           <TransactionItem
             type={type?.substring(0, type.length - 1) as 'income' | 'expense'}
             description={item.description}
-            date="12/10/2014"
+            date={new Date(item.updatedAt as string)}
             amount={item.amount}
             icon={
               {

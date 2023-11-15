@@ -23,6 +23,10 @@ export default memo(function Home(): JSX.Element {
       type : ViewActionType.SET_NAVIGATION,
       payload : true
     })
+    dispatchView({
+      type : ViewActionType.SET_NAVIGATION_TAB,
+      payload : 'home'
+    })
   },[])
 
   let expenses = 0
@@ -113,7 +117,7 @@ export default memo(function Home(): JSX.Element {
                 <TransactionItem
                   type={type?.substring(0, type.length - 1) as 'income' | 'expense'}
                   description={item.description}
-                  date="12/10/2014"
+                  date={new Date(item.updatedAt as string)}
                   amount={item.amount}
                   icon={
                     {

@@ -44,13 +44,12 @@ export default function Layout({ children }: { children: ReactNode }): JSX.Eleme
 
   useEffect(() => {
     dispatchView({
-      type: ViewActionType.SET_NAVIGATION,
-      payload: true,
-    });
-
-    dispatchView({
       type: ViewActionType.SET_NAVIGATION_TAB,
       payload: 'trans',
+    });
+    dispatchView({
+      type: ViewActionType.SET_NAVIGATION,
+      payload: true,
     });
   }, []);
 

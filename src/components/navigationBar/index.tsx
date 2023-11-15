@@ -69,7 +69,6 @@ export default function NavigationBar(): JSX.Element {
                   <span
                     onClick={() => {
                       handleshowActions();
-                      dispatchView({ type: ViewActionType.SET_NAVIGATION, payload: false });
                     }}
                     className={`text-2xl rounded-full flex items-center justify-center bg-cgreen text-white absolute  ${
                       showActions ? '-top-24 left-20  opacity-100' : 'top-1/2 left-1/2 opacity-0'
@@ -82,7 +81,6 @@ export default function NavigationBar(): JSX.Element {
                   <span
                     onClick={() => {
                       handleshowActions();
-                      dispatchView({ type: ViewActionType.SET_NAVIGATION, payload: false });
                     }}
                     className={`text-2xl rounded-full flex items-center justify-center bg-cred text-white absolute ${
                       showActions ? '-top-24 -left-20 opacity-100' : 'top-1/2 left-1/2 opacity-0'
