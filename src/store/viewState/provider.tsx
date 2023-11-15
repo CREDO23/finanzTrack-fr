@@ -39,7 +39,7 @@ export default memo(function ViewProvider({ children }: { children: ReactNode })
           }`}
         >
           {children}
-          {(!viewContext.showNavBar || viewContext.showArrowBack ) && (
+          { viewContext.showArrowBack && (
             <div
               className={`flex items-center absolute top-3 left-3 justify-center text-primary text-3xl`}
             >
@@ -47,6 +47,7 @@ export default memo(function ViewProvider({ children }: { children: ReactNode })
                 className=" cursor-pointer"
                 onClick={() => {
                   dispatcher({ type: ViewActionType.SET_NAVIGATION, payload: true });
+                  dispatcher({ type: ViewActionType.SET_ARROW_BACK, payload: false });
                   router.back();
                 }}
               >

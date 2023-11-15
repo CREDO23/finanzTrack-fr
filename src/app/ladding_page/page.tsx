@@ -14,7 +14,7 @@ export default function Home() {
           duration: 0.95,
           ease: [0.165, 0.84, 0.44, 1],
         }}
-        className=" font-bold text-9xl"
+        className=" font-semibold md:font-bold text-5xl md:text-9xl"
       >
         Track every <br /> <span className=" text-primary">dollard</span>
         <br />

@@ -10,9 +10,6 @@ export default function Profile(): JSX.Element {
   return (
     <div className="w-full font-light flex flex-col gap-5">
       <span
-        onClick={() =>
-          dispatchView({ type: ViewActionType.SET_NAVIGATION, payload: false })
-        }
         className=" cursor-pointer text-primary text-2xl"
       >
         <Link href={'/me/profile/edit'}>

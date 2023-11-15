@@ -16,7 +16,7 @@ export default function TransactionItem({
   title: string;
   description: string;
   amount: number;
-  date: string;
+  date:   Date;
   type: 'income' | 'expense';
 }) {
   const bgColor =
@@ -46,7 +46,7 @@ export default function TransactionItem({
               type == 'income' ? ' text-cgreen' : 'text-cred'
             } font-medium `}
           >{`${type == 'expense' ? '-' : '+'}$${amount}`}</p>
-          <p className=" text-xs text-cgray">{date}</p>
+          <p className=" text-xs text-cgray">{date?.toLocaleDateString()}</p>
         </div>
       </div>
     </div>

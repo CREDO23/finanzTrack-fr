@@ -21,7 +21,7 @@ export default function Transactions(): JSX.Element {
           <TransactionItem
             type={type?.substring(0, type.length - 1) as 'income' | 'expense'}
             description={item.description}
-            date="12/10/2014"
+            date={new Date(item.updatedAt as string)}
             amount={item.amount}
             icon={
               {

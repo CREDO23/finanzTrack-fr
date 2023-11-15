@@ -72,6 +72,11 @@ export default function NewTransaction(): JSX.Element {
     }
   }, [loading]);
 
+  useEffect(() => {
+    dispatchView({ type: ViewActionType.SET_NAVIGATION, payload: false });
+    dispatchView({ type: ViewActionType.SET_ARROW_BACK, payload: true });
+  },[])
+
   return (
     <>
       {msgCtx}

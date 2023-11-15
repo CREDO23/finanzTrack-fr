@@ -42,4 +42,6 @@ interface ITransaction {
   description: string;
   category_id?: string;
   category? : ITransactionCategory
+  createdAt?: string;
+  updatedAt?: string;
 }

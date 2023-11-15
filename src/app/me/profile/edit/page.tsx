@@ -2,7 +2,7 @@
 import Button from '@/components/shared/button';
 import Input from '@/components/shared/input';
 import Switch from '@/components/shared/switch';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useViewDispatcher } from '@/store/viewState/hooks';
 import { ViewActionType } from '@/store/viewState/action';
 import Link from 'next/link';
@@ -11,6 +11,11 @@ export default function Profile(): JSX.Element {
   const [password, setPassword] = useState(false);
 
   const dispatchView = useViewDispatcher();
+
+  useEffect(() => {
+    dispatchView({ type: ViewActionType.SET_NAVIGATION, payload: false });
+    dispatchView({ type: ViewActionType.SET_ARROW_BACK, payload: true });
+  },[])
 
   return (
     <div className="w-full font-light flex flex-col justify-between h-full ">
