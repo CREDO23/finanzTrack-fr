@@ -1,15 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { AnimatePresence, motion } from 'framer-motion';
 import Button from '@/components/shared/button';
 import { useState } from 'react';
 import '../../app/globals.css';
 import { FiAlignJustify } from 'react-icons/fi';
 import { Montserrat } from 'next/font/google';
-import { ViewActionType } from '@/store/viewState/action';
 import { Dropdown, MenuProps } from 'antd';
-import { BiSolidArrowFromBottom, BiSolidArrowFromTop } from 'react-icons/bi';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
