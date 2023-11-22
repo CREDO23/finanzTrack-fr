@@ -15,10 +15,12 @@ import { useTransCtgryDispatcher } from '@/store/transactionCategory/hooks';
 import { TransCtgryActionType } from '@/store/transactionCategory/actions';
 import { useViewDispatcher } from '@/store/viewState/hooks';
 import { ViewActionType } from '@/store/viewState/action';
+import { useAuth } from '@/store/auth/hooks';
 
 export default function NewTransactionCategory(): JSX.Element {
   const { type } = useParams();
   const types = useTransCtgryTypes();
+  const currentUser = useAuth();
   const dispatchTransCatgry = useTransCtgryDispatcher();
   const router = useRouter();
   const dispatchView = useViewDispatcher();
@@ -31,7 +33,7 @@ export default function NewTransactionCategory(): JSX.Element {
 
   const [addTransactionCategoryAction, { loading, data, error }] = useAxiosAction<
     ITransactionCategory,
-    { category: ITransactionCategory; type_id: string }
+    { category: ITransactionCategory; type_id: string; owner_id: string }
   >(addTransactionCategory);
 
   const { control, handleSubmit } = useForm({
@@ -43,6 +45,7 @@ export default function NewTransactionCategory(): JSX.Element {
   const onSubmit = (data: ITransactionCategory) => {
     addTransactionCategoryAction({
       type_id: types.items.find(el => el.label == type)?.id as string,
+      owner_id: currentUser.user?.id as string,
       category: {
         ...data,
       },
@@ -69,7 +72,7 @@ export default function NewTransactionCategory(): JSX.Element {
   useEffect(() => {
     dispatchView({ type: ViewActionType.SET_NAVIGATION, payload: false });
     dispatchView({ type: ViewActionType.SET_ARROW_BACK, payload: true });
-  },[])
+  }, []);
 
   return (
     <>
