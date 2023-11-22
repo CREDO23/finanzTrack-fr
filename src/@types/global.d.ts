@@ -23,6 +23,14 @@ type Transaction =
   | 'investments'
   | 'other income';
 
+interface IUser {
+  id?: string;
+  name?: string | null;
+  email?: string | null;
+  password?: string | null;
+  confirmPassword?: string | null;
+}
+
 interface ITransactionCategoryType {
   id?: string;
   label: string;
@@ -33,7 +41,9 @@ interface ITransactionCategory {
   name: string;
   description?: string;
   type_id?: string;
-  type? : ITransactionCategoryType
+  owner_id?: string;
+  type?: ITransactionCategoryType;
+  owner?: IUser;
 }
 
 interface ITransaction {
@@ -41,7 +51,7 @@ interface ITransaction {
   amount: number;
   description: string;
   category_id?: string;
-  category? : ITransactionCategory
+  category?: ITransactionCategory;
   createdAt?: string;
   updatedAt?: string;
 }
