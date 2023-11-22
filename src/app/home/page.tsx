@@ -106,7 +106,7 @@ export default memo(function Home(): JSX.Element {
               </Link>
           </div>
           <ul className="w-full flex flex-col items-center gap-2 ">
-            {transactions.loading && <span className=' animate-spin'><ImSpinner2/></span>}
+            {transactions.loading && <span className=' animate-spin'><ImSpinner2/>gggdddgddggddgdgdgd</span>}
             {!transactions.loading && transactions.items?.map((item, key) => {
 
               const category = item.category?.name as string

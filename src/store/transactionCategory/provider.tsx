@@ -44,9 +44,9 @@ export default memo(function TransCtgryProvider({
   }, []);
 
   /*
-  * Track the loading state to either set all categories to the
-  * storage or show an error message in the UI
-  **/
+   * Track the loading state to either set all categories to the
+   * storage or show an error message in the UI
+   **/
   useEffect(() => {
     if (data) {
       dispatcher({ type: TransCtgryActionType.SET_CATEGORIES, payload: data.data.data });
@@ -55,6 +55,11 @@ export default memo(function TransCtgryProvider({
     if (error) {
       msg.error(error.response?.data.message);
     }
+
+    dispatcher({
+      type: TransCtgryActionType.SET_LOADING,
+      payload: loading,
+    });
   }, [loading]);
 
   /**
@@ -69,10 +74,10 @@ export default memo(function TransCtgryProvider({
 
   return (
     <>
-    {msgContext}
-    <TransCtgryContext.Provider value={transCtgriesContext}>
-      <TransCtgryDispatcher.Provider value={dispatcher}>{children}</TransCtgryDispatcher.Provider>
-    </TransCtgryContext.Provider>
+      {msgContext}
+      <TransCtgryContext.Provider value={transCtgriesContext}>
+        <TransCtgryDispatcher.Provider value={dispatcher}>{children}</TransCtgryDispatcher.Provider>
+      </TransCtgryContext.Provider>
     </>
   );
 });
