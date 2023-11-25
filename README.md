@@ -9,7 +9,7 @@
 A comprehensive financial tracking application that assists users in managing their personal finances and expenses.
 
 - Blog post:
-- Author: CREDO23 <bakerathierry@gmail.com>
+- Author: BAKERA Thierry <bakerathierry@gmail.com>
 - Live link: [FinanzTrack](https://finanztrack.vercel.app/)
 - Api : [FinanzTrack API](https://github.com/CREDO23/finanzTrack-bc)
 
