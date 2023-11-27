@@ -28,7 +28,7 @@ export default function NewTransactionCategory(): JSX.Element {
   const addTransactionCategory = async (
     data: ITransactionCategory
   ): Promise<AxiosResponse<IAPIResponse<ITransactionCategory>>> => {
-    return APICall.post('/transaction_categories', { data }, '');
+    return APICall.post('/transaction_categories', { data }, currentUser.accessToken);
   };
 
   const [addTransactionCategoryAction, { loading, data, error }] = useAxiosAction<

@@ -18,6 +18,7 @@ import { TransCtgryActionType } from '@/store/transactionCategory/actions';
 import { TransactionActionType } from '@/store/transactions/actions';
 import { ViewActionType } from '@/store/viewState/action';
 import { useViewDispatcher } from '@/store/viewState/hooks';
+import { useAuth } from '@/store/auth/hooks';
 
 export default function NewTransaction(): JSX.Element {
   const { type } = useParams();
@@ -26,6 +27,7 @@ export default function NewTransaction(): JSX.Element {
   const dispatchTransaction = useTransactionDispatcher();
   const router = useRouter()
   const dispatchView = useViewDispatcher();
+  const currentUser = useAuth()
 
   const { handleSubmit, control } = useForm({
     defaultValues,
@@ -36,7 +38,7 @@ export default function NewTransaction(): JSX.Element {
   const addTransaction = (
     data: ITransaction
   ): Promise<AxiosResponse<IAPIResponse<ITransaction>>> => {
-    return APICall.post('/transactions', { data }, '');
+return APICall.post('/transactions', { data }, currentUser.accessToken);
   };
 
   const [addTransactionAction, { loading, data, error }] = useAxiosAction<

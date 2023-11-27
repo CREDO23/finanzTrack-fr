@@ -8,6 +8,7 @@ import APICall from '@/helpers/apiCall';
 import { AxiosResponse } from 'axios';
 import useAxiosAction from '@/hooks/useAction';
 import { message } from 'antd';
+import { useAuth } from '../auth/hooks';
 
 export const TransactionContext = createContext<ITransactionState>(initialTransactionsState);
 export const TransactionDispatcher = createContext<Dispatch<TransactionAction> | (() => null)>(
@@ -18,10 +19,11 @@ export default function TransactionsProvider({ children }: { children: ReactNode
   const [transactions, dispatcher] = useReducer(transactionReducer, initialTransactionsState);
   const storageDispatch = useStorageDispatcher();
   const [msg, msgCtx] = message.useMessage();
+  const currentUser = useAuth()
 
   // Fetch all transactios
   const fetchAllTransactions = (): Promise<AxiosResponse<IAPIResponse<ITransaction[]>>> => {
-    return APICall.get('/transactions', {}, '');
+    return APICall.get('/transactions', {}, currentUser.accessToken);
   };
 
   // Create a new axios action (fetchAllTransactions)

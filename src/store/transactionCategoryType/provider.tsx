@@ -8,6 +8,7 @@ import { message } from 'antd';
 import { AxiosResponse } from 'axios';
 import APICall from '@/helpers/apiCall';
 import useAxiosAction from '@/hooks/useAction';
+import { useAuth } from '../auth/hooks';
 
 interface Action {
   type: 'get';
@@ -30,12 +31,13 @@ export default memo(function TransCtgryTypeProvider({
   const [state, setState] = useState<ITransCtgryTypeState>(initialTransCtgryTypeState);
   const [msg, msgContext] = message.useMessage();
   const dispatchStorage = useStorageDispatcher();
+  const currentUser = useAuth()
 
   // Fetch all categories
   const fetchAllTransactionCategories = async (): Promise<
     AxiosResponse<IAPIResponse<ITransactionCategoryType[]>>
   > => {
-    return await APICall.get('/transaction_category_types/', {}, '');
+    return await APICall.get('/transaction_category_types/', {}, currentUser.accessToken);
   };
 
   // Create a new action (Fetch all categories)
@@ -45,7 +47,7 @@ export default memo(function TransCtgryTypeProvider({
 
   // Fetch all categories onLoad
   useEffect(() => {
-    fetchAllTransactionCategoryTypeAction();
+      fetchAllTransactionCategoryTypeAction();
   }, []);
 
   /*
