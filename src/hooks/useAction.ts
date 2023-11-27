@@ -40,6 +40,8 @@ function useAxiosAction<S,A = void>(action: (actionArg: any) => Promise<AxiosRes
       return { data, loading: false, error: null };
     } catch (error) {
       setError(error as AxiosError<IAPIResponse<null>>);
+      console.log(error)
+
 
       return { data: null, loading: false, error: error as AxiosError<IAPIResponse<null>> };
     } finally {
@@ -48,6 +50,7 @@ function useAxiosAction<S,A = void>(action: (actionArg: any) => Promise<AxiosRes
   };
 
   const state = { loading, data, error };
+
 
   return [performAction, state];
 }

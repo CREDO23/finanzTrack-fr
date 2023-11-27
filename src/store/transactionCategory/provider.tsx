@@ -10,6 +10,7 @@ import { AxiosResponse } from 'axios';
 import APICall from '@/helpers/apiCall';
 import useAxiosAction from '@/hooks/useAction';
 import { message } from 'antd';
+import { useAuth } from '../auth/hooks';
 
 export const TransCtgryContext = createContext<ITransCtgryState>(initialTransCtgryState);
 export const TransCtgryDispatcher = createContext<Dispatch<TransCtgryAction> | (() => null)>(
@@ -23,14 +24,14 @@ export default memo(function TransCtgryProvider({
 }): JSX.Element {
   const [transCtgriesContext, dispatcher] = useReducer(transCtgryReducer, initialTransCtgryState);
   const storageDispatch = useStorageDispatcher();
-
   const [msg, msgContext] = message.useMessage();
+  const currentUser = useAuth()
 
   // Fetch all categories
   const fetchAllTransactionCategories = async (): Promise<
     AxiosResponse<IAPIResponse<ITransactionCategory[]>>
   > => {
-    return await APICall.get('/transaction_categories/', {}, '');
+    return await APICall.get('/transaction_categories/', {}, currentUser.accessToken);
   };
 
   // Create a new action (Fetch all categories)

@@ -81,7 +81,7 @@ export default memo(function Home(): JSX.Element {
                   }`}
                 >
                   {el.icon}
-                </span>{' '}
+                </span>
                 <div className="h-full flex flex-col justify-between text-white">
                   <p className=" text-xs capitalize">{el.name}</p>
                   <p className=" text-xl font-normal">${el.totalAmount}</p>
