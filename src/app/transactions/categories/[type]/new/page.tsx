@@ -10,12 +10,12 @@ import { AxiosResponse } from 'axios';
 import useAxiosAction from '@/hooks/useAction';
 import { useEffect } from 'react';
 import { message } from 'antd';
-import { useTransCtgryTypes } from '@/store/transactionCategoryType/provider';
 import { useTransCtgryDispatcher } from '@/store/transactionCategory/hooks';
 import { TransCtgryActionType } from '@/store/transactionCategory/actions';
 import { useViewDispatcher } from '@/store/viewState/hooks';
 import { ViewActionType } from '@/store/viewState/action';
 import { useAuth } from '@/store/auth/hooks';
+import { useTransCtgryTypes } from '@/store/transactionCategoryType/hooks';
 
 export default function NewTransactionCategory(): JSX.Element {
   const { type } = useParams();

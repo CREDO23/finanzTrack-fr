@@ -40,7 +40,7 @@ const TransactionProvider = dynamic(() => import('@/store/transactions/provider'
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
-function Providers({ children }: { children: ReactNode }): JSX.Element {
+export default function Providers({ children }: { children: ReactNode }): JSX.Element {
   const pathname = usePathname();
 
   return (
@@ -74,5 +74,3 @@ function Providers({ children }: { children: ReactNode }): JSX.Element {
     </body>
   );
 }
-
-export default withAuth(Providers)
