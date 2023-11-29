@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { Montserrat } from 'next/font/google';
 import '../app/globals.css';
 import { usePathname } from 'next/navigation';
+import withAuth from '@/helpers/HOC/withAuth';
 
 
 /**
@@ -39,7 +40,7 @@ const TransactionProvider = dynamic(() => import('@/store/transactions/provider'
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
-export default function Providers({ children }: { children: ReactNode }): JSX.Element {
+function Providers({ children }: { children: ReactNode }): JSX.Element {
   const pathname = usePathname();
 
   return (
@@ -73,3 +74,5 @@ export default function Providers({ children }: { children: ReactNode }): JSX.El
     </body>
   );
 }
+
+export default withAuth(Providers)

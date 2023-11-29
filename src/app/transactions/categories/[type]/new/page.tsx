@@ -33,7 +33,7 @@ export default function NewTransactionCategory(): JSX.Element {
 
   const [addTransactionCategoryAction, { loading, data, error }] = useAxiosAction<
     ITransactionCategory,
-    { category: ITransactionCategory; type_id: string; owner_id: string }
+    { category: ITransactionCategory; type_id: string}
   >(addTransactionCategory);
 
   const { control, handleSubmit } = useForm({
@@ -45,7 +45,6 @@ export default function NewTransactionCategory(): JSX.Element {
   const onSubmit = (data: ITransactionCategory) => {
     addTransactionCategoryAction({
       type_id: types.items.find(el => el.label == type)?.id as string,
-      owner_id: currentUser.user?.id as string,
       category: {
         ...data,
       },
