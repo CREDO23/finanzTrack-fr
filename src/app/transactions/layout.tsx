@@ -2,9 +2,15 @@
 
 'use client';
 import Button from '@/components/shared/button';
+import APICall from '@/helpers/apiCall';
+import useAxiosAction from '@/hooks/useAction';
+import { useAuth } from '@/store/auth/hooks';
+import { TransCtgryTypeActionType } from '@/store/transactionCategoryType/actions';
+import { useTransCtgryTypeDispatcher } from '@/store/transactionCategoryType/hooks';
 import { ViewActionType } from '@/store/viewState/action';
 import { useViewDispatcher } from '@/store/viewState/hooks';
-import { Dropdown, MenuProps } from 'antd';
+import { Dropdown, MenuProps, message } from 'antd';
+import { AxiosResponse } from 'axios';
 import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
 import { ReactNode, useEffect, useState } from 'react';
@@ -12,6 +18,11 @@ import { BiPlus, BiSolidArrowFromBottom, BiSolidArrowFromTop } from 'react-icons
 
 export default function Layout({ children }: { children: ReactNode }): JSX.Element {
   const dispatchView = useViewDispatcher();
+  const [msg, msgContext] = message.useMessage();
+  const pathname = usePathname();
+  const { type } = useParams();
+  const currentUser = useAuth();
+  const dispatchTransCatgryTypes = useTransCtgryTypeDispatcher();
 
   const tabs = ['all', 'expenses', 'incomes'];
   const transactionsCategoryItems: MenuProps['items'] = [
@@ -39,9 +50,6 @@ export default function Layout({ children }: { children: ReactNode }): JSX.Eleme
 
   const [seletedTab, setSelectedTab] = useState('all');
 
-  const pathname = usePathname();
-  const { type } = useParams();
-
   useEffect(() => {
     dispatchView({
       type: ViewActionType.SET_NAVIGATION_TAB,
@@ -53,8 +61,43 @@ export default function Layout({ children }: { children: ReactNode }): JSX.Eleme
     });
   }, []);
 
+  // Fetch all category types
+  const fetchAllTransactionCategories = async (): Promise<
+    AxiosResponse<IAPIResponse<ITransactionCategoryType[]>>
+  > => {
+    return await APICall.get('/transaction_category_types/', {}, currentUser.accessToken);
+  };
+
+  // Create a new action (Fetch all categories)
+  const [fetchAllTransactionCategoryTypeAction, { loading, data, error }] = useAxiosAction(
+    fetchAllTransactionCategories
+  );
+
+  // Fetch all categories onLoad
+  useEffect(() => {
+    fetchAllTransactionCategoryTypeAction();
+  }, []);
+
+  /*
+   * Track the loading state to either set all categories to the
+   * storage or show an error message in the UI
+   **/
+  useEffect(() => {
+    if (data) {
+      dispatchTransCatgryTypes({
+        type: TransCtgryTypeActionType.SET_TYPES,
+        payload: data.data.data,
+      });
+    }
+
+    if (error) {
+      msg.error(error.response?.data.message);
+    }
+  }, [loading]);
+
   return (
     <div className="w-full  h-full  flex flex-col gap-4">
+      {msgContext}
       {pathname.split('/')[pathname.split('/').length - 1] != 'new' &&
         !pathname.split('/').includes('categories') && (
           <>

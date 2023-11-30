@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { Montserrat } from 'next/font/google';
 import '../app/globals.css';
 import { usePathname } from 'next/navigation';
+import withAuth from '@/helpers/HOC/withAuth';
 
 
 /**
