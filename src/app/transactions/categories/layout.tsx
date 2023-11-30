@@ -8,16 +8,24 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ReactNode, use, useEffect, useState } from 'react';
 import { BiPlus } from 'react-icons/bi';
-import { Dropdown, MenuProps } from 'antd';
+import { Dropdown, MenuProps, message } from 'antd';
 import { BiSolidArrowFromBottom, BiSolidArrowFromTop } from 'react-icons/bi';
+import APICall from '@/helpers/apiCall';
+import useAxiosAction from '@/hooks/useAction';
+import { TransCtgryActionType } from '@/store/transactionCategory/actions';
+import { AxiosResponse } from 'axios';
+import { useAuth } from '@/store/auth/hooks';
+import {  useTransCtgryDispatcher } from '@/store/transactionCategory/hooks';
 
 export default function Layout({ children }: { children: ReactNode }): JSX.Element {
-
   const dispatchView = useViewDispatcher();
+  const [msg, msgContext] = message.useMessage();
+  const currentUser = useAuth();
+  const pathname = usePathname();
+  const [seletedTab, setSelectedTab] = useState('all');
+  const dispatchTransCatgry = useTransCtgryDispatcher();
 
-  
   const tabs = ['all', 'expenses', 'incomes'];
-
   const transactionsCategoryItems: MenuProps['items'] = [
     {
       key: '1',
@@ -27,7 +35,7 @@ export default function Layout({ children }: { children: ReactNode }): JSX.Eleme
           <BiSolidArrowFromBottom />
         </span>
       ),
-      onClick : () => dispatchView({type : ViewActionType.SET_NAVIGATION, payload : false})
+      onClick: () => dispatchView({ type: ViewActionType.SET_NAVIGATION, payload: false }),
     },
     {
       key: '2',
@@ -37,14 +45,46 @@ export default function Layout({ children }: { children: ReactNode }): JSX.Eleme
           <BiSolidArrowFromTop />
         </span>
       ),
-      onClick : () => dispatchView({type : ViewActionType.SET_NAVIGATION, payload : false})
+      onClick: () => dispatchView({ type: ViewActionType.SET_NAVIGATION, payload: false }),
     },
   ];
 
-  const [seletedTab, setSelectedTab] = useState('all');
+  // Fetch all categories
+  const fetchAllTransactionCategories = async (): Promise<
+    AxiosResponse<IAPIResponse<ITransactionCategory[]>>
+  > => {
+    return await APICall.get('/transaction_categories/', {}, currentUser.accessToken);
+  };
 
-  const pathname = usePathname();
+  // Create a new action (Fetch all categories)
+  const [fetchAllTransactionCategoriesAction, { loading, data, error }] = useAxiosAction(
+    fetchAllTransactionCategories
+  );
 
+  // Fetch all categories onLoad
+  useEffect(() => {
+    fetchAllTransactionCategoriesAction();
+  }, []);
+
+  /*
+   * Track the loading state to either set all categories to the
+   * storage or show an error message in the UI
+   **/
+  useEffect(() => {
+    if (data) {
+      dispatchTransCatgry({ type: TransCtgryActionType.SET_CATEGORIES, payload: data.data.data });
+      console.log(data);
+    }
+
+    if (error) {
+      msg.error(error.response?.data.message);
+    }
+
+    dispatchTransCatgry({
+      type: TransCtgryActionType.SET_LOADING,
+      payload: loading,
+    });
+  }, [loading]);
 
   return (
     <div className="w-full  h-full  flex flex-col gap-4">

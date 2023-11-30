@@ -4,7 +4,6 @@ import { Dispatch, ReactNode, createContext, memo, useEffect, useReducer } from 
 import initialTransCtgryTypeState from './initialState';
 import { useStorageDispatcher } from '../browser/hooks';
 import { BrowserStorageActionType } from '../browser/actions';
-import { message } from 'antd';
 import { TransCtgryTypeAction } from './actions';
 import transCtgryTypeReducer from './reducer';
 
@@ -20,8 +19,10 @@ export default memo(function TransCtgryTypeProvider({
 }: {
   children: ReactNode;
 }): JSX.Element {
-  const [transCtgryTypesContext, dispatcher] = useReducer(transCtgryTypeReducer, initialTransCtgryTypeState);
-  const [msg, msgContext] = message.useMessage();
+  const [transCtgryTypesContext, dispatcher] = useReducer(
+    transCtgryTypeReducer,
+    initialTransCtgryTypeState
+  );
   const dispatchStorage = useStorageDispatcher();
 
   /**
@@ -37,9 +38,7 @@ export default memo(function TransCtgryTypeProvider({
   return (
     <TransCtgryTypeContext.Provider value={transCtgryTypesContext}>
       <TransCtgryTypeDispatcher.Provider value={dispatcher}>
-
-      {msgContext}
-      {children}
+        {children}
       </TransCtgryTypeDispatcher.Provider>
     </TransCtgryTypeContext.Provider>
   );
