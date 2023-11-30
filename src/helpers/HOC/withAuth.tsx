@@ -4,8 +4,10 @@ import { useAuth } from '@/store/auth/hooks';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-export default function withAuth(Component: React.FunctionComponent<any>) {
-  return function (props: React.ReactPropTypes) {
+export default function withAuth<T extends JSX.IntrinsicAttributes>(
+  WrappedComponent: React.ComponentType<T>
+) {
+  return function WithAuth (props: T) {
     const currentUser = useAuth();
     const router = useRouter();
 
@@ -16,7 +18,7 @@ export default function withAuth(Component: React.FunctionComponent<any>) {
     }, []);
 
     if (currentUser.accessToken && currentUser.user) {
-      return <Component {...props} />;
+      return <WrappedComponent {...props} />;
     }
   };
 }
