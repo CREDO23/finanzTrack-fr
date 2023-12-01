@@ -15,8 +15,9 @@ import useAxiosAction from '@/hooks/useAction';
 import { TransactionActionType } from '@/store/transactions/actions';
 import { AxiosResponse } from 'axios';
 import { message } from 'antd';
+import withAuth from '@/helpers/HOC/withAuth';
 
-export default memo(function Home(): JSX.Element {
+export default withAuth(memo(function Home(): JSX.Element {
   const dispatchView = useViewDispatcher();
   const dispatchTransactions = useTransactionDispatcher()
   const currentUser = useAuth();
@@ -200,4 +201,4 @@ export default memo(function Home(): JSX.Element {
       </div>
     </>
   );
-});
+}));

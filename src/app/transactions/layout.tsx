@@ -15,8 +15,9 @@ import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
 import { ReactNode, useEffect, useState } from 'react';
 import { BiPlus, BiSolidArrowFromBottom, BiSolidArrowFromTop } from 'react-icons/bi';
+import withAuth from '@/helpers/HOC/withAuth';
 
-export default function Layout({ children }: { children: ReactNode }): JSX.Element {
+export default withAuth(function Layout({ children }: { children: ReactNode }): JSX.Element {
   const dispatchView = useViewDispatcher();
   const [msg, msgContext] = message.useMessage();
   const pathname = usePathname();
@@ -68,18 +69,19 @@ export default function Layout({ children }: { children: ReactNode }): JSX.Eleme
     return await APICall.get('/transaction_category_types/', {}, currentUser.accessToken);
   };
 
-  // Create a new action (Fetch all categories)
+  // Create a new action (Fetch all category types)
   const [fetchAllTransactionCategoryTypeAction, { loading, data, error }] = useAxiosAction(
     fetchAllTransactionCategories
   );
 
-  // Fetch all categories onLoad
+  // Fetch all category types onLoad
   useEffect(() => {
     fetchAllTransactionCategoryTypeAction();
+    console.log('rendering...');
   }, []);
 
   /*
-   * Track the loading state to either set all categories to the
+   * Track the loading state to either set all category types to the
    * storage or show an error message in the UI
    **/
   useEffect(() => {
@@ -88,10 +90,13 @@ export default function Layout({ children }: { children: ReactNode }): JSX.Eleme
         type: TransCtgryTypeActionType.SET_TYPES,
         payload: data.data.data,
       });
+
+      console.log(data)
     }
 
     if (error) {
       msg.error(error.response?.data.message);
+      console.log(error)
     }
   }, [loading]);
 
@@ -155,4 +160,4 @@ export default function Layout({ children }: { children: ReactNode }): JSX.Eleme
       <div className="w-full h-full overflow-auto ">{children}</div>
     </div>
   );
-}
+})
